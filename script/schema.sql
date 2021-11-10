@@ -63,19 +63,6 @@ CREATE TABLE `customers` (
   `address` TEXT DEFAULT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `products` */
-
-DROP TABLE IF EXISTS `products`;
-
-CREATE TABLE `products` (
-  `id` INT(11),
-  `unit_id` INT(11) NOT NULL,
-  `name` VARCHAR(100) NOT NULL,
-  `bn_name` VARCHAR(100) NOT NULL,
-  `purchase_price` DOUBLE NOT NULL,
-  `sale_price` DOUBLE NOT NULL
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
 /*Table structure for table `types` */
 
 DROP TABLE IF EXISTS `types`;
@@ -95,6 +82,19 @@ CREATE TABLE `units` (
   `name` VARCHAR(100) NOT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+/*Table structure for table `products` */
+
+DROP TABLE IF EXISTS `products`;
+
+CREATE TABLE `products` (
+  `id` INT(11),
+  `unit_id` INT(11) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `bn_name` VARCHAR(100) NOT NULL,
+  `purchase_price` DOUBLE NOT NULL,
+  `sale_price` DOUBLE NOT NULL
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 /*Table structure for table `product_types` */
 
 DROP TABLE IF EXISTS `product_types`;
@@ -103,6 +103,21 @@ CREATE TABLE `product_types` (
   `id` INT(11),
   `product_id` INT(11) NOT NULL,
   `type_id` INT(11) NOT NULL
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `purchases` */
+
+DROP TABLE IF EXISTS `purchases`;
+
+CREATE TABLE `purchases` (
+  `id` INT(11),
+  `product_id` INT(11) NOT NULL,
+  `unit_id` INT(11) NOT NULL,
+  `quantity` DOUBLE NOT NULL,
+  `unit_price` DOUBLE DEFAULT NULL,
+  `total` DOUBLE NOT NULL,
+  `expiry_datetime` DATETIME DEFAULT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
