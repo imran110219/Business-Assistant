@@ -6,7 +6,6 @@ import com.moulik.businessassistant.model.User;
 import com.moulik.businessassistant.repository.RoleRepository;
 import com.moulik.businessassistant.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,12 +50,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public User createUser(User user){
+    public User createUser(User user) {
         return saveUser(user);
     }
 
-    public User updateUser(User newUser, Long id)
-    {
+    public User updateUser(User newUser, Long id) {
         return userRepository.findById(id)
                 .map(user -> {
                     user.setFirstName(newUser.getFirstName());
@@ -77,7 +75,7 @@ public class UserServiceImpl implements UserService {
                 });
     }
 
-    public void deleteUserById(Long id){
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 }

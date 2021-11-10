@@ -6,11 +6,9 @@ import com.moulik.businessassistant.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -30,5 +28,20 @@ public class UserController {
             throws RecordNotFoundException {
         User user = userService.getUserById(userId);
         return ResponseEntity.ok().body(user);
+    }
+
+    @PostMapping("/users")
+    public User createUser(@Valid @RequestBody User user) {
+        return userService.createUser(user);
+    }
+
+    @PutMapping("/users/edit/{id}")
+    public User editUserById(@RequestBody User newUser, @PathVariable(value = "id") Long userId) {
+        return userService.updateUser(newUser, userId);
+    }
+
+    @DeleteMapping("/users/delete/{id}")
+    public void deleteUserById(@PathVariable(value = "id") Long userId){
+        userService.deleteUserById(userId);
     }
 }

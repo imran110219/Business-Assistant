@@ -1,4 +1,4 @@
-INSERT  INTO `user`(`id`,`firstname`,`lastname`,`username`,`email`,`password`,`phone`,`address`,`active`) VALUES
+INSERT  INTO `users`(`id`,`firstname`,`lastname`,`username`,`email`,`password`,`phone`,`address`,`active`) VALUES
 (1,'Khandker','Qaiduzzaman','nafees','nafees@gmail.com','$2a$10$cBi8wPjrntyeUmf0I1dYLe8lIiVnl4D52VILNkXRl4kYpUf1h2StG','01912070224','Dortmund',''),
 (2,'Sadman','Sobhan','imran','imran@gmail.com','$2a$10$cBi8wPjrntyeUmf0I1dYLe8lIiVnl4D52VILNkXRl4kYpUf1h2StG','01912070224','Dhaka',''),
 (3,'Md','Amin','amin','amin@gmail.com','$2a$10$cBi8wPjrntyeUmf0I1dYLe8lIiVnl4D52VILNkXRl4kYpUf1h2StG','01912070224','Dhaka',''),
@@ -7,14 +7,14 @@ INSERT  INTO `user`(`id`,`firstname`,`lastname`,`username`,`email`,`password`,`p
 (6,'Reaz','Uddin','reaz','reaz@gmail.com','$2a$10$WtZSoxojxPih9upyYS5teu6jcEwLZJpgIleWZDiuzIW8cdf6jYE2O','01912070224','Khulna',''),
 (7,'Ahasan','Habib','royal','reaz@gmail.com','$2a$10$WtZSoxojxPih9upyYS5teu6jcEwLZJpgIleWZDiuzIW8cdf6jYE2O','01912070224','Khulna','');
 
-INSERT  INTO `role`(`id`,`name`) VALUES
+INSERT  INTO `roles`(`id`,`name`) VALUES
 (1,'SUPER_ADMIN'),
 (2,'INVESTOR'),
 (3,'WORKER'),
 (4,'SELLER'),
 (5,'SUPPLIER');
 
-INSERT  INTO `user_role`(`id`,`user_id`,`role_id`) VALUES
+INSERT  INTO `user_roles`(`id`,`user_id`,`role_id`) VALUES
 (1,1,1),
 (2,1,2),
 (3,1,3),
@@ -49,6 +49,19 @@ INSERT  INTO `user_role`(`id`,`user_id`,`role_id`) VALUES
 (32,7,3),
 (33,7,4),
 (34,7,5);
+
+INSERT  INTO `units`(`id`,`name`) VALUES
+(1,'gm'),
+(2,'Kg'),
+(3,'ml'),
+(4,'L');
+
+INSERT  INTO `products`(`id`,`name`,`bn_name`,`purchase_price`,`sale_price`,`unit_id`) VALUES
+(1,'Rose Petal Powder','গোলাপ গুড়া', ,70, 140, ),
+(2,'INVESTOR'),
+(3,'WORKER'),
+(4,'SELLER'),
+(5,'SUPPLIER');
 
 
 
