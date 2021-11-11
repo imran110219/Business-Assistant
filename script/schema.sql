@@ -120,6 +120,61 @@ CREATE TABLE `purchases` (
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+/*Table structure for table `stocks` */
+
+DROP TABLE IF EXISTS `stocks`;
+
+CREATE TABLE `stocks` (
+  `id` INT(11),
+  `purchase_id` INT(11) NOT NULL,
+  `unit_id` INT(11) NOT NULL,
+  `quantity` DOUBLE NOT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `sale_invoices` */
+
+DROP TABLE IF EXISTS `sale_invoices`;
+
+CREATE TABLE `sale_invoices` (
+  `id` VARCHAR(15),
+  `user_id` INT(11) NOT NULL,
+  `seller_id` INT(11) NOT NULL,
+  `total` DOUBLE NOT NULL,
+  `discount` DOUBLE NOT NULL,
+  `payable` DOUBLE NOT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `product_commissions` */
+
+DROP TABLE IF EXISTS `product_commissions`;
+
+CREATE TABLE `product_commissions` (
+  `id` VARCHAR(15),
+  `product_id` INT(11) NOT NULL,
+  `seller_id` INT(11) NOT NULL,
+  `total` DOUBLE NOT NULL,
+  `discount` DOUBLE NOT NULL,
+  `payable` DOUBLE NOT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `sales` */
+
+DROP TABLE IF EXISTS `sales`;
+
+CREATE TABLE `sales` (
+  `id` INT(11),
+  `sale_invoice_id` VARCHAR(15) NOT NULL,
+  `stock_id` INT(11) NOT NULL,
+  `quantity` DOUBLE NOT NULL,
+  `unit_price` DOUBLE NOT NULL,
+  `discount` DOUBLE NOT NULL,
+  `total` DOUBLE NOT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
