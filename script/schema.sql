@@ -22,8 +22,8 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `id` INT(11),
-  `firstname` VARCHAR(100) NOT NULL,
-  `lastname` VARCHAR(100) NOT NULL,
+  `first_name` VARCHAR(100) NOT NULL,
+  `last_name` VARCHAR(100) NOT NULL,
   `username` VARCHAR(40) NOT NULL,
   `email` VARCHAR(40) NOT NULL,
   `password` VARCHAR(500) NOT NULL,
@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `customers`;
 
 CREATE TABLE `customers` (
   `id` INT(11),
-  `fullname` VARCHAR(100) NOT NULL,
+  `full_name` VARCHAR(100) NOT NULL,
   `phone` VARCHAR(100) DEFAULT NULL,
   `email` VARCHAR(40) DEFAULT NULL,
   `address` TEXT DEFAULT NULL
@@ -82,19 +82,6 @@ CREATE TABLE `units` (
   `name` VARCHAR(100) NOT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `products` */
-
-DROP TABLE IF EXISTS `products`;
-
-CREATE TABLE `products` (
-  `id` INT(11),
-  `unit_id` INT(11) NOT NULL,
-  `name` VARCHAR(100) NOT NULL,
-  `bn_name` VARCHAR(100) NOT NULL,
-  `purchase_price` DOUBLE NOT NULL,
-  `sale_price` DOUBLE NOT NULL
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
 /*Table structure for table `product_types` */
 
 DROP TABLE IF EXISTS `product_types`;
@@ -105,12 +92,39 @@ CREATE TABLE `product_types` (
   `type_id` INT(11) NOT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+/*Table structure for table `products` */
+
+DROP TABLE IF EXISTS `products`;
+
+CREATE TABLE `products` (
+  `id` INT(11),
+  `unit_id` INT(11) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `bn_name` VARCHAR(100) NOT NULL,
+  `purchase_price` DOUBLE NOT NULL,
+  `sale_price` DOUBLE NOT NULL,
+  `percentage` DOUBLE NOT NULL
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `expenses` */
+
+DROP TABLE IF EXISTS `expenses`;
+
+CREATE TABLE `expenses` (
+  `id` VARCHAR(15),
+  `user_id` INT(11) NOT NULL,
+  `total` DOUBLE NOT NULL,
+  `purpose` VARCHAR(100) DEFAULT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 /*Table structure for table `purchases` */
 
 DROP TABLE IF EXISTS `purchases`;
 
 CREATE TABLE `purchases` (
   `id` INT(11),
+  `expense_id` INT(11) NOT NULL,
   `product_id` INT(11) NOT NULL,
   `unit_id` INT(11) NOT NULL,
   `quantity` DOUBLE NOT NULL,
@@ -132,31 +146,31 @@ CREATE TABLE `stocks` (
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `sale_invoices` */
+/*Table structure for table `incomes` */
 
-DROP TABLE IF EXISTS `sale_invoices`;
+DROP TABLE IF EXISTS `incomes`;
 
-CREATE TABLE `sale_invoices` (
-  `id` VARCHAR(15),
+CREATE TABLE `incomes` (
+  `id` INT(11),
   `user_id` INT(11) NOT NULL,
+  `customer_id` INT(11) NOT NULL,
   `seller_id` INT(11) NOT NULL,
   `total` DOUBLE NOT NULL,
+  `delivery_cost` DOUBLE NOT NULL,
   `discount` DOUBLE NOT NULL,
   `payable` DOUBLE NOT NULL,
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `product_commissions` */
+/*Table structure for table `seller_commissions` */
 
-DROP TABLE IF EXISTS `product_commissions`;
+DROP TABLE IF EXISTS `seller_commissions`;
 
-CREATE TABLE `product_commissions` (
-  `id` VARCHAR(15),
-  `product_id` INT(11) NOT NULL,
+CREATE TABLE `seller_commissions` (
+  `id` INT(11),
   `seller_id` INT(11) NOT NULL,
-  `total` DOUBLE NOT NULL,
-  `discount` DOUBLE NOT NULL,
-  `payable` DOUBLE NOT NULL,
+  `product_id` INT(11) NOT NULL,
+  `amount` DOUBLE NOT NULL,
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
@@ -166,7 +180,7 @@ DROP TABLE IF EXISTS `sales`;
 
 CREATE TABLE `sales` (
   `id` INT(11),
-  `sale_invoice_id` VARCHAR(15) NOT NULL,
+  `income_id` INT(11) NOT NULL,
   `stock_id` INT(11) NOT NULL,
   `quantity` DOUBLE NOT NULL,
   `unit_price` DOUBLE NOT NULL,

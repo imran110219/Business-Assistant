@@ -3,22 +3,26 @@ package com.moulik.businessassistant.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
+/**
+ * @author Sadman
+ */
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "firstname")
+    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "lastname")
+    @Column(name = "last_name")
     private String lastName;
     @Column(name = "username")
     private String userName;
@@ -33,6 +37,6 @@ public class User {
     @Column(name = "active")
     private Boolean active;
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 }

@@ -14,25 +14,19 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "product_types")
+public class ProductType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Basic
-    @Column(name = "full_name")
-    private String fullName;
-
+    @JoinColumn(name = "product_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private int productId;
+    
     @Basic
-    @Column(name = "phone")
-    private String phone;
-
-    @Basic
-    @Column(name = "email")
-    private String email;
-
-    @Basic
-    @Column(name = "address")
-    private String address;
+    @JoinColumn(name = "type_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private int typeId;
 }

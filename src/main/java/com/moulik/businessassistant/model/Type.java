@@ -14,25 +14,17 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "types")
+public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Basic
-    @Column(name = "full_name")
-    private String fullName;
+    @Column(name = "name")
+    private String name;
 
     @Basic
-    @Column(name = "phone")
-    private String phone;
-
-    @Basic
-    @Column(name = "email")
-    private String email;
-
-    @Basic
-    @Column(name = "address")
-    private String address;
+    @Column(name = "description")
+    private String description;
 }
