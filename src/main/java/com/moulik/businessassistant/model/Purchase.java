@@ -19,19 +19,19 @@ import java.util.Objects;
 public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @Basic
-    @Column(name = "expense_id")
-    private int expenseId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "expense_id")
+    private Expense expense;
 
-    @Basic
-    @Column(name = "product_id")
-    private int productId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    @Basic
-    @Column(name = "unit_id")
-    private int unitId;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "unit_id")
+    private Unit unit;
 
     @Basic
     @Column(name = "quantity")

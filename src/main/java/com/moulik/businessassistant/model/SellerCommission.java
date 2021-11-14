@@ -19,62 +19,21 @@ import java.util.Objects;
 public class SellerCommission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "seller_id")
+    private User seller;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Basic
-    @javax.persistence.Column(name = "seller_id")
-    private int sellerId;
-
-    private int productId;
-
-    @Basic
-    @javax.persistence.Column(name = "product_id")
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
+    @Column(name = "amount")
     private double amount;
 
     @Basic
-    @javax.persistence.Column(name = "amount")
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
+    @Column(name = "datetime")
     private Timestamp datetime;
-
-    @Basic
-    @javax.persistence.Column(name = "datetime")
-    public Timestamp getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Timestamp datetime) {
-        this.datetime = datetime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SellerCommission that = (SellerCommission) o;
-        return id == that.id &&
-                sellerId == that.sellerId &&
-                productId == that.productId &&
-                Double.compare(that.amount, amount) == 0 &&
-                Objects.equals(datetime, that.datetime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, sellerId, productId, amount, datetime);
-    }
 }

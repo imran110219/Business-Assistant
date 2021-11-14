@@ -18,7 +18,7 @@ import java.util.Objects;
 public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Basic
     @Column(name = "name")

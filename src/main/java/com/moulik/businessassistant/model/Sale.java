@@ -19,17 +19,15 @@ import java.util.Objects;
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
-    @Basic
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "income_id")
-    private int incomeId;
+    private Income income;
 
-    @Basic
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "stock_id")
-    private int stockId;
+    private Stock stock;
 
     @Basic
     @Column(name = "quantity")

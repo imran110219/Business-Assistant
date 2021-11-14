@@ -18,7 +18,7 @@ import java.util.Objects;
 public class ProductType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Basic
     @JoinColumn(name = "product_id")
