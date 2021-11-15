@@ -20,13 +20,11 @@ public class ProductType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Basic
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id")
+    private Product product;
+
     @ManyToOne(cascade = CascadeType.MERGE)
-    private int productId;
-    
-    @Basic
     @JoinColumn(name = "type_id")
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private int typeId;
+    private Type type;
 }

@@ -36,8 +36,8 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     public ProductType updateProductType(ProductType newProductType, Long id) {
         return productTypeRepository.findById(id)
                 .map(productType -> {
-                    productType.setProductId(newProductType.getProductId());
-                    productType.setTypeId(newProductType.getTypeId());
+                    productType.setProduct(newProductType.getProduct());
+                    productType.setType(newProductType.getType());
                     return productTypeRepository.save(productType);
                 })
                 .orElseGet(() -> {

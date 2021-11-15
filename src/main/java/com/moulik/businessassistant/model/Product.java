@@ -22,7 +22,7 @@ public class Product {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "unit_id")
-    private int unitId;
+    private Unit unit;
 
     @Basic
     @Column(name = "name")

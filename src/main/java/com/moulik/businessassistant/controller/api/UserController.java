@@ -1,4 +1,4 @@
-package com.moulik.businessassistant.controller;
+package com.moulik.businessassistant.controller.api;
 
 import com.moulik.businessassistant.exception.RecordNotFoundException;
 import com.moulik.businessassistant.iservice.UserService;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class UserController {
 
     private final UserService userService;
