@@ -23,7 +23,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="sidebar">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
+        <a href="#" class="brand-link">
             <img src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/img/AdminLTELogo.png" alt="AdminLTE Logo"
                  class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
@@ -44,39 +44,36 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                       with font-awesome or any other icon font library -->
-                    <li class="nav-item menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>
-                                Starter Pages
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item">
+                        <a id="a-dashboard" th:href="@{/dashboard}" class="nav-link">
+                            <i class="fas fa-tachometer-alt nav-icon"></i>
+                            <p>Dashboard</p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="#" class="nav-link active">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Active Page</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Inactive Page</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>
-                                Simple Link
-                                <span class="right badge badge-danger">New</span>
-                            </p>
+                        <a id="a-user" th:href="@{/users}" class="nav-link">
+                            <i class="fas fa-users nav-icon"></i>
+                            <p>Users</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="a-role" th:href="@{/roles}" class="nav-link">
+                            <i class="fas fa-users-cog nav-icon"></i>
+                            <p>Roles</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="a-product" th:href="@{/products}" class="nav-link">
+                            <i class="fas fa-shopping-basket nav-icon"></i>
+                            <p>Products</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="a-unit" th:href="@{/units}" class="nav-link">
+                            <i class="fas fa-balance-scale-right nav-icon"></i>
+                            <p>Units</p>
                         </a>
                     </li>
                 </ul>
@@ -88,9 +85,13 @@
 
 
     <!-- Control Sidebar -->
-    <!--    <aside class="control-sidebar control-sidebar-dark">-->
-    <!-- Control sidebar content goes here -->
-    <!--    </aside>-->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+            <h5>Title</h5>
+            <p>Sidebar content</p>
+        </div>
+    </aside>
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
@@ -104,6 +105,6 @@
 <!-- AdminLTE App -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0-rc/js/adminlte.min.js" integrity="sha512-pbrNMLSckfh8yEOr2o1RT+4zMU3Sj7+zP3BOY6nFVI/FLnjTRyubNppLbosEt4nvLCcdsEa8tmKhH3uqOYFXKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/dist/js/demo.js"></script>
+<script src="/static/dist/js/demo.js"></script>
 </body>
 </html>

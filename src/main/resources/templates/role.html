@@ -217,13 +217,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/users}" class="nav-link active">
+                        <a th:href="@{/users}" class="nav-link">
                             <i class="fas fa-users nav-icon"></i>
                             <p>Users</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/roles}" class="nav-link">
+                        <a th:href="@{/roles}" class="nav-link active">
                             <i class="fas fa-users-cog nav-icon"></i>
                             <p>Roles</p>
                         </a>
@@ -254,7 +254,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3 class="m-0">User List</h3>
+                        <h3 class="m-0">Unit List</h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -282,26 +282,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Status</th>
+                                        <th>Name</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:id="${user.id}" th:each="user : ${users}">
-                                        <td th:id="'fullname'+${user.id}" th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-                                        <td th:id="'email'+${user.id}" th:text="${user.email}"></td>
-                                        <td th:id="'phone'+${user.id}" th:text="${user.phone}"></td>
-                                        <td style="text-align: center">
-                                            <span th:class="${user.active} ? 'badge badge-success' : 'badge badge-danger'"
-                                                  th:text="${user.active}? 'active' : 'inactive'">
-                                            </span>
-                                        </td>
+                                    <tr th:id="${unit.id}" th:each="unit : ${units}">
+                                        <td th:id="'name'+${unit.id}" th:text="${unit.name}"></td>
                                         <td>
                                             <div class="btn-group">
-                                                <input type="hidden" id="userId" th:value="${user.id}">
+                                                <input type="hidden" id="userId" th:value="${unit.id}">
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
@@ -322,10 +312,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Status</th>
+                                        <th>Name</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
