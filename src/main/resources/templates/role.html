@@ -1,254 +1,35 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Starter</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <!--  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">-->
-    <!-- DataTables -->
-    <!-- <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css"> -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.1.1/dataTables.bootstrap4.min.css"
-          integrity="sha512-+RecGjm1x5bWxA/jwm9sqcn5EV0tNej3Xxq5HtIOLM9YM9VgI2LbhEDn099Xhxg6HuvrmsXR0J6JQxL7tLHFHw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.9/responsive.bootstrap4.min.css"
-          integrity="sha512-Kep8UHrRwnogj5OXG/g6ZXsfOtdFwJBhcEkEKIKZfiiedZmjwVH3JAyPM3Ag4x6xG1DYf+U/Uu/MFCMkQh+eWQ=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.css"
-          integrity="sha512-0LpZpPhy5gC20rXCT9HfsYz0gF+wRD62I/MCY+d1tDgK7xKpvd0hQLMBqyXS9BYdzyis/BdIW2iMIBK8e+0o+Q=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0-rc/css/adminlte.min.css"
-          integrity="sha512-YOsl4pnOb5NC868yn1JxAzjJsWkLNtP53uc3OcyAl0Q2R1cwo/mdI1hHSQM8gbIxWj97mKeLoD9R0aiYibFQAA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <th:block layout:fragment="link">
+        <!-- DataTables -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.1.1/dataTables.bootstrap4.min.css"
+              integrity="sha512-+RecGjm1x5bWxA/jwm9sqcn5EV0tNej3Xxq5HtIOLM9YM9VgI2LbhEDn099Xhxg6HuvrmsXR0J6JQxL7tLHFHw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.9/responsive.bootstrap4.min.css"
+              integrity="sha512-Kep8UHrRwnogj5OXG/g6ZXsfOtdFwJBhcEkEKIKZfiiedZmjwVH3JAyPM3Ag4x6xG1DYf+U/Uu/MFCMkQh+eWQ=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.css"
+              integrity="sha512-0LpZpPhy5gC20rXCT9HfsYz0gF+wRD62I/MCY+d1tDgK7xKpvd0hQLMBqyXS9BYdzyis/BdIW2iMIBK8e+0o+Q=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    </th:block>
 </head>
 
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <!-- Left navbar links -->
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
-        </ul>
-
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
-            <li class="nav-item">
-                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                    <i class="fas fa-search"></i>
-                </a>
-                <div class="navbar-search-block">
-                    <form class="form-inline">
-                        <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                   aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-navbar" type="submit">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </li>
-
-            <!-- Messages Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-comments"></i>
-                    <span class="badge badge-danger navbar-badge">3</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/img/user1-128x128.jpg"
-                                 alt="User Avatar" class="img-size-50 mr-3 img-circle">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Brad Diesel
-                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">Call me whenever you can...</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/img/user8-128x128.jpg"
-                                 alt="User Avatar" class="img-size-50 img-circle mr-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    John Pierce
-                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">I got your message bro</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <!-- Message Start -->
-                        <div class="media">
-                            <img src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/img/user3-128x128.jpg"
-                                 alt="User Avatar" class="img-size-50 img-circle mr-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Nora Silvester
-                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">The subject goes here</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-                        <!-- Message End -->
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                </div>
-            </li>
-            <!-- Notifications Dropdown Menu -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-header">15 Notifications</span>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                    <i class="fas fa-expand-arrows-alt"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <!-- /.navbar -->
-
-    <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
-            <img src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                 class="brand-image img-circle elevation-3" style="opacity: .8">
-            <span class="brand-text font-weight-light">AdminLTE 3</span>
-        </a>
-
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/img/user2-160x160.jpg"
-                         class="img-circle elevation-2" alt="User Image">
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">Alexander Pierce</a>
-                </div>
-            </div>
-
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
-                    <li class="nav-item">
-                        <a th:href="@{/dashboard}" class="nav-link">
-                            <i class="fas fa-tachometer-alt nav-icon"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/users}" class="nav-link">
-                            <i class="fas fa-users nav-icon"></i>
-                            <p>Users</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/roles}" class="nav-link active">
-                            <i class="fas fa-users-cog nav-icon"></i>
-                            <p>Roles</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/products}" class="nav-link">
-                            <i class="fas fa-shopping-basket nav-icon"></i>
-                            <p>Products</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{/units}" class="nav-link">
-                            <i class="fas fa-balance-scale-right nav-icon"></i>
-                            <p>Units</p>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-    </aside>
-
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" layout:fragment="content">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -287,11 +68,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:id="${unit.id}" th:each="unit : ${units}">
-                                        <td th:id="'name'+${unit.id}" th:text="${unit.name}"></td>
+                                    <tr th:id="${role.id}" th:each="role : ${roles}">
+                                        <td th:id="'name'+${role.id}" th:text="${role.name}"></td>
                                         <td>
                                             <div class="btn-group">
-                                                <input type="hidden" id="userId" th:value="${unit.id}">
+                                                <input type="hidden" id="userId" th:value="${role.id}">
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
@@ -333,104 +114,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- /.content-wrapper -->
 
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-        <h5>Title</h5>
-        <p>Sidebar content</p>
-    </div>
-</aside>
-<!-- /.control-sidebar -->
-
-<!-- Main Footer -->
-<footer class="main-footer">
-    <!-- To the right -->
-    <div class="float-right d-none d-sm-inline">
-        Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-</footer>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 
-<!-- jQuery -->
-<!--<script src="plugins/jquery/jquery.min.js"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- Bootstrap 4 -->
-<!--<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.min.js"
-        integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- DataTables  & Plugins -->
-<!-- <script src="../../plugins/datatables/jquery.dataTables.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
-        integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.1.1/dataTables.bootstrap4.min.js"
-        integrity="sha512-9o2JT4zBJghTU0EEIgPvzzHOulNvo0jq2spTfo6mMmZ6S3jK+gljrfo0mKDAxoMnrkZa6ml2ZgByBQ5ga8noDQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-responsive/2.2.9/dataTables.responsive.min.js"
-        integrity="sha512-4knl+8+KWBNyMb27V1fosX42eCyJFH383Sus6gnxuqzwmQpiLpyBJyuC17RRwLd5X6cmVUQeT5lOkVXbwajvCA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.9/responsive.bootstrap4.min.js"
-        integrity="sha512-Isz8YdCq0qR8rvj22HWFFfj9vi+ambuHruMv9ctDBb2BDiSfOcY76BcoH5uSVj1nHDbCUb9qeG2CDSTYkaf8QQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/dataTables.buttons.min.js"
-        integrity="sha512-dDM0yJk5qN8gaaUywkA8C9CSv9l3C0cf+2qSgKzbLMMi//6RFgd+mcDT9rYdtAtK6H0NH48lS4jbJA1sLnUBHw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.js"
-        integrity="sha512-D4MloW0hy9XtYnqtvwfg2T2WZRn0dB8Ir0KcPrDX7S/gVE05JotZQHirzd9vMSIT8ViKyntOOZl1muHii0spUA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/jszip/jszip.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"
-        integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"
-        integrity="sha512-Yf733gmgLgGUo+VfWq4r5HAEaxftvuTes86bKvwTpqOY3oH0hHKtX/9FfKYUcpaxeBJxeXvcN4EY3J6fnmc9cA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/vfs_fonts.js"
-        integrity="sha512-cktKDgjEiIkPVHYbn8bh/FEyYxmt4JDJJjOCu5/FQAkW4bc911XtKYValiyzBiJigjVEvrIAyQFEbRJZyDA1wQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.html5.min.js"
-        integrity="sha512-ZUGQhhVpnt2+pGfdtbxpt4BBUic1COXkzPUNW/fRAB2lHS+GqxsuVBDVdtwSS0HVnjoRsmo4xAl1aRjHsFTirw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.print.min.js"
-        integrity="sha512-VpZVjReV4WlkVWNMq5Bdhg3SmA9DwzA/NyNlzqguI/hAni9s3++rgHEr7XZHXEJl/Y4IZWTVNWy/7Jy9uQPLMA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.colVis.min.js"
-        integrity="sha512-ll1/he+7pNOn7mpHZxOpCdV6HB+BNYs9rcDeHZSTV33/JHJIET2HCSjbCXREbl0LteZVQpg+zgpAlIABGXL/ow=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- AdminLTE App -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0-rc/js/adminlte.min.js"
-        integrity="sha512-pbrNMLSckfh8yEOr2o1RT+4zMU3Sj7+zP3BOY6nFVI/FLnjTRyubNppLbosEt4nvLCcdsEa8tmKhH3uqOYFXKg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!--<script src="dist/js/adminlte.min.js"></script>-->
-<!-- AdminLTE for demo purposes -->
-<script src="../static/dist/js/demo.js"></script>
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-</script>
+<th:block layout:fragment="script">
+    <!-- DataTables  & Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+            integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.1.1/dataTables.bootstrap4.min.js"
+            integrity="sha512-9o2JT4zBJghTU0EEIgPvzzHOulNvo0jq2spTfo6mMmZ6S3jK+gljrfo0mKDAxoMnrkZa6ml2ZgByBQ5ga8noDQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-responsive/2.2.9/dataTables.responsive.min.js"
+            integrity="sha512-4knl+8+KWBNyMb27V1fosX42eCyJFH383Sus6gnxuqzwmQpiLpyBJyuC17RRwLd5X6cmVUQeT5lOkVXbwajvCA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.9/responsive.bootstrap4.min.js"
+            integrity="sha512-Isz8YdCq0qR8rvj22HWFFfj9vi+ambuHruMv9ctDBb2BDiSfOcY76BcoH5uSVj1nHDbCUb9qeG2CDSTYkaf8QQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/dataTables.buttons.min.js"
+            integrity="sha512-dDM0yJk5qN8gaaUywkA8C9CSv9l3C0cf+2qSgKzbLMMi//6RFgd+mcDT9rYdtAtK6H0NH48lS4jbJA1sLnUBHw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.js"
+            integrity="sha512-D4MloW0hy9XtYnqtvwfg2T2WZRn0dB8Ir0KcPrDX7S/gVE05JotZQHirzd9vMSIT8ViKyntOOZl1muHii0spUA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/jszip/jszip.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"
+            integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"
+            integrity="sha512-Yf733gmgLgGUo+VfWq4r5HAEaxftvuTes86bKvwTpqOY3oH0hHKtX/9FfKYUcpaxeBJxeXvcN4EY3J6fnmc9cA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/vfs_fonts.js"
+            integrity="sha512-cktKDgjEiIkPVHYbn8bh/FEyYxmt4JDJJjOCu5/FQAkW4bc911XtKYValiyzBiJigjVEvrIAyQFEbRJZyDA1wQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.html5.min.js"
+            integrity="sha512-ZUGQhhVpnt2+pGfdtbxpt4BBUic1COXkzPUNW/fRAB2lHS+GqxsuVBDVdtwSS0HVnjoRsmo4xAl1aRjHsFTirw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.print.min.js"
+            integrity="sha512-VpZVjReV4WlkVWNMq5Bdhg3SmA9DwzA/NyNlzqguI/hAni9s3++rgHEr7XZHXEJl/Y4IZWTVNWy/7Jy9uQPLMA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.colVis.min.js"
+            integrity="sha512-ll1/he+7pNOn7mpHZxOpCdV6HB+BNYs9rcDeHZSTV33/JHJIET2HCSjbCXREbl0LteZVQpg+zgpAlIABGXL/ow=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+</th:block>
 </body>
 
 </html>
