@@ -35,12 +35,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3 class="m-0">User List</h3>
+                        <h3 class="m-0">Income List</h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">User List</li>
+                            <li class="breadcrumb-item active">Income List</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -63,26 +63,30 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Status</th>
+                                        <th>User</th>
+                                        <th>Customer</th>
+                                        <th>Seller</th>
+                                        <th>Total</th>
+                                        <th>Delivery</th>
+                                        <th>Discount</th>
+                                        <th>Payable</th>
+                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:id="${user.id}" th:each="user : ${users}">
-                                        <td th:id="'fullname'+${user.id}" th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-                                        <td th:id="'email'+${user.id}" th:text="${user.email}"></td>
-                                        <td th:id="'phone'+${user.id}" th:text="${user.phone}"></td>
-                                        <td style="text-align: center">
-                                            <span th:class="${user.active} ? 'badge badge-success' : 'badge badge-danger'"
-                                                  th:text="${user.active}? 'active' : 'inactive'">
-                                            </span>
-                                        </td>
+                                    <tr th:id="${income.id}" th:each="income : ${incomes}">
+                                        <td th:id="'user'+${income.id}" th:text="${income.user.userName}"></td>
+                                        <td th:id="'customer'+${income.id}" th:text="${income.customer.fullName}"></td>
+                                        <td th:id="'seller'+${income.id}" th:text="${income.seller.userName}"></td>
+                                        <td th:id="'total'+${income.id}" th:text="${income.total}"></td>
+                                        <td th:id="'delivery'+${income.id}" th:text="${income.deliveryCost}"></td>
+                                        <td th:id="'discount'+${income.id}" th:text="${income.discount}"></td>
+                                        <td th:id="'payable'+${income.id}" th:text="${income.payable}"></td>
+                                        <td th:id="'date'+${income.id}" th:text="${income.datetime}"></td>
                                         <td>
                                             <div class="btn-group">
-                                                <input type="hidden" id="userId" th:value="${user.id}">
+                                                <input type="hidden" id="userId" th:value="${income.id}">
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
@@ -103,10 +107,14 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Status</th>
+                                        <th>User</th>
+                                        <th>Customer</th>
+                                        <th>Seller</th>
+                                        <th>Total</th>
+                                        <th>Delivery</th>
+                                        <th>Discount</th>
+                                        <th>Payable</th>
+                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>

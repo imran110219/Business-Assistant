@@ -26,8 +26,8 @@ public class Expense {
     private User user;
 
     @Basic
-    @Column(name = "total")
-    private double total;
+    @Column(name = "amount")
+    private double amount;
 
     @Basic
     @Column(name = "purpose")

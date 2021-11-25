@@ -37,7 +37,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseRepository.findById(id)
                 .map(purchase -> {
                     purchase.setProduct(newPurchase.getProduct());
-                    purchase.setExpense(newPurchase.getExpense());
+                    purchase.setCustomer(newPurchase.getCustomer());
                     purchase.setQuantity(newPurchase.getQuantity());
                     purchase.setExpiryDatetime(newPurchase.getExpiryDatetime());
                     purchase.setDatetime(newPurchase.getDatetime());

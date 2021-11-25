@@ -35,12 +35,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3 class="m-0">User List</h3>
+                        <h3 class="m-0">customer List</h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">User List</li>
+                            <li class="breadcrumb-item active">customer List</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -66,23 +66,19 @@
                                         <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Status</th>
+                                        <th>Address</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:id="${user.id}" th:each="user : ${users}">
-                                        <td th:id="'fullname'+${user.id}" th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-                                        <td th:id="'email'+${user.id}" th:text="${user.email}"></td>
-                                        <td th:id="'phone'+${user.id}" th:text="${user.phone}"></td>
-                                        <td style="text-align: center">
-                                            <span th:class="${user.active} ? 'badge badge-success' : 'badge badge-danger'"
-                                                  th:text="${user.active}? 'active' : 'inactive'">
-                                            </span>
-                                        </td>
+                                    <tr th:id="${customer.id}" th:each="customer : ${customers}">
+                                        <td th:id="'fullname'+${customer.id}" th:text="${customer.fullName}"></td>
+                                        <td th:id="'email'+${customer.id}" th:text="${customer.email}"></td>
+                                        <td th:id="'phone'+${customer.id}" th:text="${customer.phone}"></td>
+                                        <td th:id="'address'+${customer.id}" th:text="${customer.address}"></td>
                                         <td>
                                             <div class="btn-group">
-                                                <input type="hidden" id="userId" th:value="${user.id}">
+                                                <input type="hidden" id="userId" th:value="${customer.id}">
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
@@ -106,7 +102,7 @@
                                         <th>Full Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Status</th>
+                                        <th>Address</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>

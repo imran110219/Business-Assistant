@@ -10,7 +10,7 @@ public interface ExpenseService {
 
     Expense getExpenseById(Long id) throws RecordNotFoundException;
 
-    Expense createExpense(Expense expense);
+    Expense createExpense(Expense Expense);
 
     Expense updateExpense(Expense newExpense, Long id);
 

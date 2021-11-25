@@ -35,12 +35,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3 class="m-0">User List</h3>
+                        <h3 class="m-0">Type List</h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">User List</li>
+                            <li class="breadcrumb-item active">Type List</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -63,26 +63,16 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Status</th>
+                                        <th>Name</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:id="${user.id}" th:each="user : ${users}">
-                                        <td th:id="'fullname'+${user.id}" th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
-                                        <td th:id="'email'+${user.id}" th:text="${user.email}"></td>
-                                        <td th:id="'phone'+${user.id}" th:text="${user.phone}"></td>
-                                        <td style="text-align: center">
-                                            <span th:class="${user.active} ? 'badge badge-success' : 'badge badge-danger'"
-                                                  th:text="${user.active}? 'active' : 'inactive'">
-                                            </span>
-                                        </td>
+                                    <tr th:id="${type.id}" th:each="type : ${types}">
+                                        <td th:id="'name'+${type.id}" th:text="${type.name}"></td>
                                         <td>
                                             <div class="btn-group">
-                                                <input type="hidden" id="userId" th:value="${user.id}">
+                                                <input type="hidden" id="userId" th:value="${type.id}">
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
@@ -103,10 +93,7 @@
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Status</th>
+                                        <th>Name</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
@@ -131,7 +118,6 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
 <th:block layout:fragment="script">
     <!-- DataTables  & Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"

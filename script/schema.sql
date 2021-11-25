@@ -113,7 +113,7 @@ DROP TABLE IF EXISTS `expenses`;
 CREATE TABLE `expenses` (
   `id` VARCHAR(15),
   `user_id` INT(11) NOT NULL,
-  `total` DOUBLE NOT NULL,
+  `amount` DOUBLE NOT NULL,
   `purpose` VARCHAR(100) DEFAULT NULL,
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
@@ -154,7 +154,7 @@ CREATE TABLE `incomes` (
   `id` INT(11),
   `user_id` INT(11) NOT NULL,
   `customer_id` INT(11) NOT NULL,
-  `seller_id` INT(11) NOT NULL,
+  `seller_id` INT(11) DEFAULT NULL,
   `total` DOUBLE NOT NULL,
   `delivery_cost` DOUBLE NOT NULL,
   `discount` DOUBLE NOT NULL,

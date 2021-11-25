@@ -11,7 +11,7 @@ public interface CustomerService {
 
     Customer getCustomerById(Long id) throws RecordNotFoundException;
 
-    Customer createCustomer(Customer customer);
+    Customer createCustomer(Customer Customer);
 
     Customer updateCustomer(Customer newCustomer, Long id);
 

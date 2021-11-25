@@ -87,12 +87,20 @@ INSERT  INTO `products`(`id`,`unit_id`,`name`,`bn_name`,`purchase_price`,`sale_p
 (9,1,'Cinnamon Powder','দারুচিনি গুড়া',40,80,15),
 (10,1,'Haratki Powder','হরতকি গুড়া',35,70,15);
 
+
 INSERT  INTO `customers`(`id`,`full_name`,`phone`,`email`,`address`) VALUES
 (1,'Sadman Sobhan','01711123456','sadman@email.com','Dhaka'),
 (2,'Khandker Qaiduzzaman','01711123456','nafees@email.com','Dhaka'),
 (3,'Tulip Sarker','01711123456','tulip@email.com','Dhaka'),
 (4,'Md Amin','01711123456','amin@email.com','Dhaka'),
 (5,'Md Zahidul','01711123456','zahid@email.com','Dhaka');
+
+insert  into `expenses`(`id`,`user_id`,`amount`,`purpose`,`datetime`) values
+(1,1,200,'buy','2021-11-25 23:22:56'),
+(2,2,500,'transport','2021-11-25 23:23:09'),
+(3,1,500,'buy','2021-11-25 23:23:22'),
+(4,2,500,'buy','2021-11-25 23:23:34'),
+(5,1,1000,'Boost','2021-11-25 23:24:09');
 
 
 

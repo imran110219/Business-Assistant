@@ -12,41 +12,41 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class CustomerServiceImpl implements CustomerService {
-    private final CustomerRepository customerRepository;
+    private final CustomerRepository CustomerRepository;
 
     @Override
     public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+        return CustomerRepository.findAll();
     }
 
     @Override
     public Customer getCustomerById(Long id) throws RecordNotFoundException {
-        return customerRepository.getById(id);
+        return CustomerRepository.getById(id);
     }
 
     @Override
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public Customer createCustomer(Customer Customer) {
+        return CustomerRepository.save(Customer);
     }
 
     @Override
     public Customer updateCustomer(Customer newCustomer, Long id) {
-        return customerRepository.findById(id)
-                .map(customer -> {
-                    customer.setFullName(newCustomer.getFullName());
-                    customer.setAddress(newCustomer.getAddress());
-                    customer.setEmail(newCustomer.getEmail());
-                    customer.setPhone(newCustomer.getPhone());
-                    return customerRepository.save(customer);
+        return CustomerRepository.findById(id)
+                .map(Customer -> {
+                    Customer.setFullName(newCustomer.getFullName());
+                    Customer.setAddress(newCustomer.getAddress());
+                    Customer.setEmail(newCustomer.getEmail());
+                    Customer.setPhone(newCustomer.getPhone());
+                    return CustomerRepository.save(Customer);
                 })
                 .orElseGet(() -> {
                     newCustomer.setId(id);
-                    return customerRepository.save(newCustomer);
+                    return CustomerRepository.save(newCustomer);
                 });
     }
 
     @Override
     public void deleteCustomerById(Long id) {
-        customerRepository.deleteById(id);
+        CustomerRepository.deleteById(id);
     }
 }

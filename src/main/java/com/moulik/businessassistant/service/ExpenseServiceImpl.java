@@ -28,8 +28,8 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public Expense createExpense(Expense expense) {
-        return expenseRepository.save(expense);
+    public Expense createExpense(Expense Expense) {
+        return expenseRepository.save(Expense);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                 .map(expense -> {
                     expense.setUser(newExpense.getUser());
                     expense.setPurpose(newExpense.getPurpose());
-                    expense.setTotal(newExpense.getTotal());
+                    expense.setAmount(newExpense.getAmount());
                     expense.setDatetime(newExpense.getDatetime());
                     return expenseRepository.save(expense);
                 })
