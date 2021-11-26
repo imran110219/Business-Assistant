@@ -23,6 +23,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    public double getTotalExpenseAmount() {
+        return expenseRepository.getTotalExpenseAmount();
+    }
+
+    @Override
     public Expense getExpenseById(Long id) throws RecordNotFoundException {
         return expenseRepository.getById(id);
     }

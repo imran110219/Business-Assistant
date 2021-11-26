@@ -23,6 +23,11 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     @Override
+    public double getTotalIncomeAmount() {
+        return incomeRepository.getTotalIncomeAmount();
+    }
+
+    @Override
     public Income getIncomeById(Long id) throws RecordNotFoundException {
         return incomeRepository.getById(id);
     }
