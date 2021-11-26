@@ -58,7 +58,12 @@ ALTER TABLE `seller_commissions`
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`id`),
   ADD KEY `income_id` (`income_id`),
-  ADD KEY `stock_id` (`stock_id`);
+  ADD KEY `stock_id` (`stock_id`),
+  ADD KEY `unit_id` (`unit_id`);
+
+ALTER TABLE `working_hours`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `worker_id` (`worker_id`);
 
 -- Add Auto Increment
 
@@ -104,6 +109,9 @@ ALTER TABLE `seller_commissions`
 ALTER TABLE `sales`
   MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+ALTER TABLE `working_hours`
+  MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 -- Add Foreign Key
 
 ALTER TABLE `user_roles`
@@ -140,4 +148,8 @@ ALTER TABLE `seller_commissions`
 
 ALTER TABLE `sales`
   ADD CONSTRAINT `sale_fk_income` FOREIGN KEY (`income_id`) REFERENCES `incomes` (`id`),
-  ADD CONSTRAINT `sale_fk_stock` FOREIGN KEY (`stock_id`) REFERENCES `stocks` (`id`);
+  ADD CONSTRAINT `sale_fk_stock` FOREIGN KEY (`stock_id`) REFERENCES `stocks` (`id`),
+  ADD CONSTRAINT `sale_fk_unit` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`);
+
+ALTER TABLE `working_hours`
+  ADD CONSTRAINT `working_hour_fk_worker` FOREIGN KEY (`worker_id`) REFERENCES `users` (`id`);

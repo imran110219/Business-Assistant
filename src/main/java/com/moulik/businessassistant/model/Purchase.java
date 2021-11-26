@@ -22,8 +22,8 @@ public class Purchase {
     private long id;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "Customer_id")
-    private Customer Customer;
+    @JoinColumn(name = "expense_id")
+    private Expense expense;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product_id")

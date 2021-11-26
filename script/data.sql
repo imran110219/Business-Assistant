@@ -87,7 +87,6 @@ INSERT  INTO `products`(`id`,`unit_id`,`name`,`bn_name`,`purchase_price`,`sale_p
 (9,1,'Cinnamon Powder','দারুচিনি গুড়া',40,80,15),
 (10,1,'Haratki Powder','হরতকি গুড়া',35,70,15);
 
-
 INSERT  INTO `customers`(`id`,`full_name`,`phone`,`email`,`address`) VALUES
 (1,'Sadman Sobhan','01711123456','sadman@email.com','Dhaka'),
 (2,'Khandker Qaiduzzaman','01711123456','nafees@email.com','Dhaka'),

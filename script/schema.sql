@@ -182,10 +182,23 @@ CREATE TABLE `sales` (
   `id` INT(11),
   `income_id` INT(11) NOT NULL,
   `stock_id` INT(11) NOT NULL,
+  `unit_id` INT(11) NOT NULL,
   `quantity` DOUBLE NOT NULL,
   `unit_price` DOUBLE NOT NULL,
   `discount` DOUBLE NOT NULL,
   `total` DOUBLE NOT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `working_hours` */
+
+DROP TABLE IF EXISTS `working_hours`;
+
+CREATE TABLE `working_hours` (
+  `id` INT(11),
+  `worker_id` INT(11) NOT NULL,
+  `hour` DOUBLE NOT NULL,
+  `purpose` VARCHAR(100) DEFAULT NULL,
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 

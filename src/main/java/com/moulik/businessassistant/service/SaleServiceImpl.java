@@ -40,6 +40,7 @@ public class SaleServiceImpl implements SaleService {
                     sale.setDiscount(newSale.getDiscount());
                     sale.setQuantity(newSale.getQuantity());
                     sale.setStock(newSale.getStock());
+                    sale.setUnit(newSale.getUnit());
                     sale.setDatetime(newSale.getDatetime());
                     sale.setTotal(newSale.getTotal());
                     sale.setDatetime(newSale.getDatetime());

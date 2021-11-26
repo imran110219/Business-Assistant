@@ -29,6 +29,10 @@ public class Sale {
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "unit_id")
+    private Unit unit;
+
     @Basic
     @Column(name = "quantity")
     private double quantity;

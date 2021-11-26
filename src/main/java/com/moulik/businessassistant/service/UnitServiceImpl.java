@@ -15,38 +15,38 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class UnitServiceImpl implements UnitService {
-    private final UnitRepository typeRepository;
+    private final UnitRepository unitRepository;
 
     @Override
     public List<Unit> getAllUnits() {
-        return typeRepository.findAll();
+        return unitRepository.findAll();
     }
 
     @Override
     public Unit getUnitById(Long id) throws RecordNotFoundException {
-        return typeRepository.getById(id);
+        return unitRepository.getById(id);
     }
 
     @Override
-    public Unit createUnit(Unit type) {
-        return typeRepository.save(type);
+    public Unit createUnit(Unit unit) {
+        return unitRepository.save(unit);
     }
 
     @Override
     public Unit updateUnit(Unit newUnit, Long id) {
-        return typeRepository.findById(id)
-                .map(type -> {
-                    type.setName(newUnit.getName());
-                    return typeRepository.save(type);
+        return unitRepository.findById(id)
+                .map(unit -> {
+                    unit.setName(newUnit.getName());
+                    return unitRepository.save(unit);
                 })
                 .orElseGet(() -> {
                     newUnit.setId(id);
-                    return typeRepository.save(newUnit);
+                    return unitRepository.save(newUnit);
                 });
     }
 
     @Override
     public void deleteUnitById(Long id) {
-        typeRepository.deleteById(id);
+        unitRepository.deleteById(id);
     }
 }
