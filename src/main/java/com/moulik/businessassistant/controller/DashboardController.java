@@ -17,6 +17,8 @@ public class DashboardController {
     private final IncomeService incomeService;
     private final ExpenseService expenseService;
     private final ProductService productService;
+    private final UserService userService;
+    private final InvestmentService investmentService;
 
     @GetMapping(value="/dashboard")
     public ModelAndView home(){
@@ -24,6 +26,8 @@ public class DashboardController {
         modelAndView.addObject("totalIncomeAmount", (int) incomeService.getTotalIncomeAmount());
         modelAndView.addObject("totalExpenseAmount", (int) expenseService.getTotalExpenseAmount());
         modelAndView.addObject("totalProductNumber", productService.getAllProducts().size());
+        modelAndView.addObject("userList", userService.getUserList());
+        modelAndView.addObject("investList", investmentService.getInvestList());
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }

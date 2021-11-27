@@ -202,6 +202,29 @@ CREATE TABLE `working_hours` (
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
+/*Table structure for table `bank_statement` */
+
+DROP TABLE IF EXISTS `bank_statement`;
+
+CREATE TABLE `bank_statement` (
+  `id` INT(11),
+  `user_id` INT(11) NOT NULL,
+  `amount` DOUBLE NOT NULL,
+  `transaction_type` VARCHAR(100) DEFAULT NULL,
+  `datetime` DATETIME NOT NULL
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `investment` */
+
+DROP TABLE IF EXISTS `investment`;
+
+CREATE TABLE `investment` (
+  `id` INT(11),
+  `investor_id` INT(11) NOT NULL,
+  `amount` DOUBLE NOT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

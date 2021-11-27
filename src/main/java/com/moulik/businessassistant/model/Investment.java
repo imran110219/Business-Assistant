@@ -3,6 +3,7 @@ package com.moulik.businessassistant.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
@@ -14,25 +15,21 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "investment")
+public class Investment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Basic
-    @Column(name = "full_name")
-    private String fullName;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "investor_id")
+    private User investor;
 
     @Basic
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "amount")
+    private double amount;
 
     @Basic
-    @Column(name = "email")
-    private String email;
-
-    @Basic
-    @Column(name = "address")
-    private String address;
+    @Column(name = "datetime")
+    private Timestamp datetime;
 }

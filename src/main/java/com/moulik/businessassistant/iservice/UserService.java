@@ -21,4 +21,5 @@ public interface UserService {
     User createUser(User user);
     User updateUser(User newUser, Long id);
     void deleteUserById(Long id);
+    List<String> getUserList();
 }

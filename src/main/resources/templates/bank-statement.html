@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <th:block layout:fragment="link">
+        <!-- DataTables -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.1.1/dataTables.bootstrap4.min.css"
+              integrity="sha512-+RecGjm1x5bWxA/jwm9sqcn5EV0tNej3Xxq5HtIOLM9YM9VgI2LbhEDn099Xhxg6HuvrmsXR0J6JQxL7tLHFHw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.9/responsive.bootstrap4.min.css"
+              integrity="sha512-Kep8UHrRwnogj5OXG/g6ZXsfOtdFwJBhcEkEKIKZfiiedZmjwVH3JAyPM3Ag4x6xG1DYf+U/Uu/MFCMkQh+eWQ=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.css"
+              integrity="sha512-0LpZpPhy5gC20rXCT9HfsYz0gF+wRD62I/MCY+d1tDgK7xKpvd0hQLMBqyXS9BYdzyis/BdIW2iMIBK8e+0o+Q=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    </th:block>
+</head>
+
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" layout:fragment="content">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h3 class="m-0">Bank Statement</h3>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Bank Statement</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+                            <!-- <div class="card-header">
+                              <h3 class="card-title">DataTable with default features</h3>
+                            </div> -->
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Amount</th>
+                                        <th>Transaction Type</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:id="${bankStatement.id}" th:each="bankStatement : ${bankStatements}">
+                                        <td th:id="'user'+${bankStatement.id}" th:text="${bankStatement.user.userName}"></td>
+                                        <td th:id="'amount'+${bankStatement.id}" th:text="${bankStatement.amount}"></td>
+                                        <td th:id="'transacion'+${bankStatement.id}" th:text="${bankStatement.transactionType}"></td>
+                                        <td th:id="'date'+${bankStatement.id}" th:text="${bankStatement.datetime}"></td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <input type="hidden" id="userId" th:value="${bankStatement.id}">
+                                                <button type="button" id="btnView"
+                                                        class="btn btn-block btn-info btn-sm"
+                                                        style="margin-top: 8px;border-radius: 3px 0 0 3px;"
+                                                ><i class="fas fa-eye"></i>
+                                                </button>
+                                                <button type="button" id="btnEdit"
+                                                        class="btn btn-block btn-primary btn-sm"
+                                                        style="margin-top: 8px"><i
+                                                        class="fas fa-edit"></i>
+                                                </button>
+                                                <button type="button" id="btnDelete"
+                                                        class="btn btn-block btn-danger btn-sm"><i
+                                                        class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Amount</th>
+                                        <th>Transaction Type</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <!-- /.col-md-6 -->
+            </div>
+            <!-- /.row -->
+        </section><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block layout:fragment="script">
+    <!-- DataTables  & Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
+            integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-bs4/1.1.1/dataTables.bootstrap4.min.js"
+            integrity="sha512-9o2JT4zBJghTU0EEIgPvzzHOulNvo0jq2spTfo6mMmZ6S3jK+gljrfo0mKDAxoMnrkZa6ml2ZgByBQ5ga8noDQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-responsive/2.2.9/dataTables.responsive.min.js"
+            integrity="sha512-4knl+8+KWBNyMb27V1fosX42eCyJFH383Sus6gnxuqzwmQpiLpyBJyuC17RRwLd5X6cmVUQeT5lOkVXbwajvCA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-responsive-bs4/2.2.9/responsive.bootstrap4.min.js"
+            integrity="sha512-Isz8YdCq0qR8rvj22HWFFfj9vi+ambuHruMv9ctDBb2BDiSfOcY76BcoH5uSVj1nHDbCUb9qeG2CDSTYkaf8QQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/dataTables.buttons.min.js"
+            integrity="sha512-dDM0yJk5qN8gaaUywkA8C9CSv9l3C0cf+2qSgKzbLMMi//6RFgd+mcDT9rYdtAtK6H0NH48lS4jbJA1sLnUBHw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.js"
+            integrity="sha512-D4MloW0hy9XtYnqtvwfg2T2WZRn0dB8Ir0KcPrDX7S/gVE05JotZQHirzd9vMSIT8ViKyntOOZl1muHii0spUA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/jszip/jszip.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"
+            integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"
+            integrity="sha512-Yf733gmgLgGUo+VfWq4r5HAEaxftvuTes86bKvwTpqOY3oH0hHKtX/9FfKYUcpaxeBJxeXvcN4EY3J6fnmc9cA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/vfs_fonts.js"
+            integrity="sha512-cktKDgjEiIkPVHYbn8bh/FEyYxmt4JDJJjOCu5/FQAkW4bc911XtKYValiyzBiJigjVEvrIAyQFEbRJZyDA1wQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.html5.min.js"
+            integrity="sha512-ZUGQhhVpnt2+pGfdtbxpt4BBUic1COXkzPUNW/fRAB2lHS+GqxsuVBDVdtwSS0HVnjoRsmo4xAl1aRjHsFTirw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.print.min.js"
+            integrity="sha512-VpZVjReV4WlkVWNMq5Bdhg3SmA9DwzA/NyNlzqguI/hAni9s3++rgHEr7XZHXEJl/Y4IZWTVNWy/7Jy9uQPLMA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.colVis.min.js"
+            integrity="sha512-ll1/he+7pNOn7mpHZxOpCdV6HB+BNYs9rcDeHZSTV33/JHJIET2HCSjbCXREbl0LteZVQpg+zgpAlIABGXL/ow=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+</th:block>
+</body>
+
+</html>

@@ -65,6 +65,15 @@ ALTER TABLE `working_hours`
   ADD PRIMARY KEY (`id`),
   ADD KEY `worker_id` (`worker_id`);
 
+ALTER TABLE `bank_statement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+
+ALTER TABLE `investment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `investor_id` (`investor_id`);
+
 -- Add Auto Increment
 
 ALTER TABLE `users`
@@ -112,6 +121,12 @@ ALTER TABLE `sales`
 ALTER TABLE `working_hours`
   MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+ALTER TABLE `bank_statement`
+  MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+ALTER TABLE `investment`
+  MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 -- Add Foreign Key
 
 ALTER TABLE `user_roles`
@@ -153,3 +168,9 @@ ALTER TABLE `sales`
 
 ALTER TABLE `working_hours`
   ADD CONSTRAINT `working_hour_fk_worker` FOREIGN KEY (`worker_id`) REFERENCES `users` (`id`);
+
+ALTER TABLE `bank_statement`
+  ADD CONSTRAINT `bank_statement_fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+ALTER TABLE `investment`
+  ADD CONSTRAINT `investment_fk_investor` FOREIGN KEY (`investor_id`) REFERENCES `users` (`id`);
