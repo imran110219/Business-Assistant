@@ -20,4 +20,6 @@ public interface InvestmentService {
     void deleteInvestmentById(Long id);
 
     List<Double> getInvestList();
+
+    List<String> getInvestorList();
 }

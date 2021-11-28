@@ -128,10 +128,12 @@
                             <div class="card-body">
                                 <div class="tab-content p-0">
                                     <!-- Morris chart - Sales -->
-                                    <div class="chart tab-pane active" id="invest-chart" style="position: relative; height: 300px;">
+                                    <div class="chart tab-pane active" id="invest-chart"
+                                         style="position: relative; height: 300px;">
                                         <canvas id="invest-chart-canvas" height="300" style="height: 300px;"></canvas>
                                     </div>
-                                    <div class="chart tab-pane" id="workhour-chart" style="position: relative; height: 300px;">
+                                    <div class="chart tab-pane" id="workhour-chart"
+                                         style="position: relative; height: 300px;">
                                         <canvas id="workhour-chart-canvas" height="300" style="height: 300px;"></canvas>
                                     </div>
                                 </div>
@@ -156,7 +158,8 @@
                                     <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
                                         <i class="far fa-calendar-alt"></i>
                                     </button>
-                                    <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse" title="Collapse">
+                                    <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"
+                                            title="Collapse">
                                         <i class="fas fa-minus"></i>
                                     </button>
                                 </div>
@@ -207,6 +210,9 @@
 <!-- REQUIRED SCRIPTS -->
 
 <th:block layout:fragment="script">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+            integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function () {
             $("button").click(function () {
@@ -216,36 +222,28 @@
 
         /*<![CDATA[*/
         $(function () {
-            //-------------
-            //- DONUT CHART -
-            //-------------
-            // Get context with jQuery - using jQuery's .get() method.
-            var totalPurchase = Math.floor([[${totalPurchaseAmount}]]);
-            var totalSale = Math.floor([[${totalSaleAmount}]]);
             var investChartCanvas = $('#invest-chart-canvas').get(0).getContext('2d')
-            var investData        = {
-                labels: [[${userList}]],
+            var investData = {
+                labels: [[${investorList}]],
                 datasets: [
                     {
                         data: [[${investList}]],
-                        backgroundColor : ['#f56954', '#00a65a'],
+                        // backgroundColor: [[${investColorList}]],
+                        background: ["#CB4335", "#884EA0","#2E86C1","#17A589","#28B463","#D4AC0D","#CA6F1E","#A6ACAF"]
                     }
                 ]
             }
-            var donutOptions     = {
-                maintainAspectRatio : false,
-                responsive : true,
+            var investOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
             }
-            //Create pie or douhnut chart
-            // You can switch between pie and douhnut using the method below.
-            var financeChart = new Chart(donutChartCanvas, {
+            var investChart = new Chart(investChartCanvas, {
                 type: 'doughnut',
-                data: donutData,
-                options: donutOptions
+                data: investData,
+                options: investOptions
             })
         });
         /*]]>*/
-        }
     </script>
 </th:block>
 

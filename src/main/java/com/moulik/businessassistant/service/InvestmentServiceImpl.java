@@ -53,4 +53,9 @@ public class InvestmentServiceImpl implements InvestmentService {
     public List<Double> getInvestList() {
         return investmentRepository.getInvestList();
     }
+
+    @Override
+    public List<String> getInvestorList() {
+        return investmentRepository.getInvestorList();
+    }
 }

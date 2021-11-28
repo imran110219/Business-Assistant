@@ -13,4 +13,7 @@ import java.util.Map;
 public interface InvestmentRepository extends JpaRepository<Investment, Long> {
     @Query("SELECT sum(amount) FROM Investment group by investor order by investor.userName")
     List<Double> getInvestList();
+
+    @Query("SELECT distinct investor.userName FROM Investment order by investor.userName")
+    List<String> getInvestorList();
 }
