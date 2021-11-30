@@ -4,10 +4,15 @@ import com.moulik.businessassistant.exception.RecordNotFoundException;
 import com.moulik.businessassistant.iservice.SaleService;
 import com.moulik.businessassistant.model.Sale;
 import com.moulik.businessassistant.repository.SaleRepository;
+import com.moulik.businessassistant.util.DataUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Sadman
@@ -56,5 +61,27 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public void deleteSaleById(Long id) {
         saleRepository.deleteById(id);
+    }
+
+    @Override
+    public Map<String, Double> getHighestSale(){
+        Map<String,Double> map = DataUtil.convertMapToMap(saleRepository.getHighestSale());
+        Map<String,Double>  sortedMapReverseOrder =  map.entrySet().
+                stream().
+                sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).
+                collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        System.out.println(sortedMapReverseOrder);
+        return sortedMapReverseOrder;
+    }
+
+    @Override
+    public Map<String, Double> getLowestSale(){
+        Map<String,Double> map = DataUtil.convertMapToMap(saleRepository.getHighestSale());
+        Map<String,Double>  sortedMap =  map.entrySet().
+                stream().
+                sorted(Map.Entry.comparingByValue()).
+                collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        System.out.println(sortedMap);
+        return sortedMap;
     }
 }

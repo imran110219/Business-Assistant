@@ -21,6 +21,9 @@ public class DashboardController {
     private final ProductService productService;
     private final UserService userService;
     private final InvestmentService investmentService;
+    private final WorkingHourService workingHourService;
+    private final CustomerService customerService;
+    private final SaleService saleService;
     private final DataUtil dataUtil;
 
     @GetMapping(value="/dashboard")
@@ -30,11 +33,19 @@ public class DashboardController {
         modelAndView.addObject("totalIncomeAmount", (int) incomeService.getTotalIncomeAmount());
         modelAndView.addObject("totalExpenseAmount", (int) expenseService.getTotalExpenseAmount());
         modelAndView.addObject("totalProductNumber", productService.getAllProducts().size());
-        List<String> investorList = investmentService.getInvestorList();
-        investorList.stream().collect(Collectors.joining("','", "'", "'"));
-        modelAndView.addObject("investorList", investorList.stream().collect(Collectors.joining("','", "'", "'")));
+        modelAndView.addObject("totalCustomerNumber", customerService.getAllCustomers().size());
+
+        modelAndView.addObject("workerList", workingHourService.getWorkerList());
+        modelAndView.addObject("workHourList", workingHourService.getWorkHourList());
+        modelAndView.addObject("workHourColorList", dataUtil.getColorListByNumber(workingHourService.getWorkerList().size()));
+
+        modelAndView.addObject("investorList", investmentService.getInvestorList());
         modelAndView.addObject("investList", investmentService.getInvestList());
         modelAndView.addObject("investColorList", dataUtil.getColorListByNumber(investmentService.getInvestList().size()));
+
+        modelAndView.addObject("highestSales", saleService.getHighestSale());
+        modelAndView.addObject("lowestSales", saleService.getLowestSale());
+
         modelAndView.setViewName("dashboard");
         return modelAndView;
     }

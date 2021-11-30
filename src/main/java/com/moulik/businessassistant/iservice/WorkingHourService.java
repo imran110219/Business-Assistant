@@ -15,4 +15,8 @@ public interface WorkingHourService {
     WorkingHour updateWorkingHour(WorkingHour newWorkingHour, Long id);
 
     void deleteWorkingHourById(Long id);
+
+    List<Double> getWorkHourList();
+
+    List<String> getWorkerList();
 }

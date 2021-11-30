@@ -52,4 +52,15 @@ public class WorkingHourServiceImpl implements WorkingHourService {
     public void deleteWorkingHourById(Long id) {
         workingHourRepository.deleteById(id);
     }
+
+    @Override
+    public List<Double> getWorkHourList() {
+        return workingHourRepository.getWorkHourList();
+    }
+
+    @Override
+    public List<String> getWorkerList() {
+        return workingHourRepository.getWorkerList();
+    }
+
 }

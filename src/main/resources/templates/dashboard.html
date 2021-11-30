@@ -91,8 +91,8 @@
                             <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
                             <div class="info-box-content">
-                                <span class="info-box-text">New Members</span>
-                                <span class="info-box-number">2,000</span>
+                                <span class="info-box-text">Customers</span>
+                                <span class="info-box-number">[[${totalCustomerNumber}]]</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -102,17 +102,16 @@
                 </div>
                 <!-- /.row -->
 
-                <!-- Main row -->
                 <div class="row">
+                    <!-- User Data -->
                     <!-- Left col -->
                     <section class="col-lg-6 connectedSortable">
 
-                        <!-- Custom tabs (Charts with tabs)-->
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <i class="fas fa-chart-pie mr-1"></i>
-                                    User Data
+                                    User Statistics
                                 </h3>
                                 <div class="card-tools">
                                     <ul class="nav nav-pills ml-auto">
@@ -145,50 +144,39 @@
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
                     <section class="col-lg-6 connectedSortable">
-
-                        <!-- Map card -->
-                        <div class="card bg-gradient-primary">
-                            <div class="card-header border-0">
+                        <!-- BAR CHART -->
+                        <!-- Sales Summary -->
+                        <div class="card">
+                            <div class="card-header">
                                 <h3 class="card-title">
-                                    <i class="fas fa-map-marker-alt mr-1"></i>
-                                    Visitors
+                                    <i class="fas fa-chart-bar mr-1"></i>
+                                    Sales Summary
                                 </h3>
-                                <!-- card tools -->
+
                                 <div class="card-tools">
-                                    <button type="button" class="btn btn-primary btn-sm daterange" title="Date range">
-                                        <i class="far fa-calendar-alt"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-primary btn-sm" data-card-widget="collapse"
-                                            title="Collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
+                                    <ul class="nav nav-pills ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="#max-chart" data-toggle="tab">Highest</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#min-chart" data-toggle="tab">Lowest</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <!-- /.card-tools -->
                             </div>
                             <div class="card-body">
-                                <div id="world-map" style="height: 250px; width: 100%;"></div>
-                            </div>
-                            <!-- /.card-body-->
-                            <div class="card-footer bg-transparent">
-                                <div class="row">
-                                    <div class="col-4 text-center">
-                                        <div id="sparkline-1"></div>
-                                        <div class="text-white">Visitors</div>
+                                <div class="tab-content p-0">
+                                    <!-- Morris chart - Sales -->
+                                    <div class="chart tab-pane active" id="max-chart"
+                                         style="position: relative; height: 300px;">
+                                        <canvas id="maxBarChart" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
                                     </div>
-                                    <!-- ./col -->
-                                    <div class="col-4 text-center">
-                                        <div id="sparkline-2"></div>
-                                        <div class="text-white">Online</div>
+                                    <div class="chart tab-pane" id="min-chart" style="position: relative; height: 300px;">
+                                        <canvas id="minBarChart" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
                                     </div>
-                                    <!-- ./col -->
-                                    <div class="col-4 text-center">
-                                        <div id="sparkline-3"></div>
-                                        <div class="text-white">Sales</div>
-                                    </div>
-                                    <!-- ./col -->
                                 </div>
-                                <!-- /.row -->
                             </div>
+                            <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
 
@@ -196,6 +184,34 @@
                     <!-- right col -->
                 </div>
                 <!-- /.row (main row) -->
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- LINE CHART -->
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Line Chart</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart">
+                                    <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
             </div>
             <!-- /.row -->
         </section><!-- /.container-fluid -->
@@ -213,7 +229,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
             integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
+
+    <script type="text/javascript" th:inline="javascript">
         $(document).ready(function () {
             $("button").click(function () {
                 $("p").slideToggle();
@@ -222,14 +239,36 @@
 
         /*<![CDATA[*/
         $(function () {
+
+            // Work Hour Chart
+            var workHourChartCanvas = $('#workhour-chart-canvas').get(0).getContext('2d')
+            var workHourData = {
+                labels: [[${workerList}]],
+                datasets: [
+                    {
+                        data: [[${workHourList}]],
+                        backgroundColor: [[${workHourColorList}]],
+                    }
+                ]
+            }
+            var workHourOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            var workHourChart = new Chart(workHourChartCanvas, {
+                type: 'doughnut',
+                data: workHourData,
+                options: workHourOptions
+            })
+
+            // Invest Chart
             var investChartCanvas = $('#invest-chart-canvas').get(0).getContext('2d')
             var investData = {
                 labels: [[${investorList}]],
                 datasets: [
                     {
                         data: [[${investList}]],
-                        // backgroundColor: [[${investColorList}]],
-                        background: ["#CB4335", "#884EA0","#2E86C1","#17A589","#28B463","#D4AC0D","#CA6F1E","#A6ACAF"]
+                        backgroundColor: [[${investColorList}]],
                     }
                 ]
             }
@@ -241,6 +280,167 @@
                 type: 'doughnut',
                 data: investData,
                 options: investOptions
+            })
+
+            // Sale Bar Chart
+            var highest = [[${highestSales}]];
+            var maxLabels = [];
+            var maxData = [];
+            $.each(highest, function( index, value ) {
+                maxLabels.push(index);
+                maxData.push(value);
+            });
+
+            var lowest = [[${lowestSales}]];
+            var minLabels = [];
+            var minData = [];
+            $.each(lowest, function( index, value ) {
+                minLabels.push(index);
+                minData.push(value);
+            });
+
+            var maxAreaChartData = {
+                labels  : maxLabels,
+                datasets: [
+                    {
+                        label               : 'Most Sale Product',
+                        backgroundColor     : 'rgba(60,141,188,0.9)',
+                        borderColor         : 'rgba(60,141,188,0.8)',
+                        pointRadius         :  false,
+                        pointColor          : '#3b8bba',
+                        pointStrokeColor    : 'rgba(60,141,188,1)',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data                :  maxData
+                    }
+                ]
+            }
+
+            var minAreaChartData = {
+                labels  : minLabels,
+                datasets: [
+                    {
+                        label               : 'Least Sale Product',
+                        backgroundColor     : 'rgba(60,141,188,0.9)',
+                        borderColor         : 'rgba(60,141,188,0.8)',
+                        pointRadius         :  false,
+                        pointColor          : '#3b8bba',
+                        pointStrokeColor    : 'rgba(60,141,188,1)',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data                :  minData
+                    }
+                ]
+            }
+
+            //-------------
+            //- Max BAR CHART -
+            //-------------
+            var maxBarChartCanvas = $('#maxBarChart').get(0).getContext('2d')
+            var maxBarChartData = $.extend(true, {}, maxAreaChartData)
+            var maxTemp0 = maxAreaChartData.datasets[0]
+            // var temp1 = areaChartData.datasets[1]
+            // maxBarChartData.datasets[0] = temp1
+            maxBarChartData.datasets[0] = maxTemp0
+
+            var maxBarChartOptions = {
+                responsive              : true,
+                maintainAspectRatio     : false,
+                datasetFill             : false
+            }
+
+            var maxSaleChart = new Chart(maxBarChartCanvas, {
+                type: 'bar',
+                data: maxBarChartData,
+                options: maxBarChartOptions
+            })
+
+            //-------------
+            //- Max BAR CHART -
+            //-------------
+            var minBarChartCanvas = $('#minBarChart').get(0).getContext('2d')
+            var minBarChartData = $.extend(true, {}, minAreaChartData)
+            var minTemp0 = minAreaChartData.datasets[0]
+            // var temp1 = areaChartData.datasets[1]
+            // maxBarChartData.datasets[0] = temp1
+            minBarChartData.datasets[0] = minTemp0
+
+            var minBarChartOptions = {
+                responsive              : true,
+                maintainAspectRatio     : false,
+                datasetFill             : false
+            }
+
+            var minSaleChart = new Chart(minBarChartCanvas, {
+                type: 'bar',
+                data: minBarChartData,
+                options: minBarChartOptions
+            })
+
+
+            var areaChartData = {
+                labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', ],
+                datasets: [
+                    {
+                        label               : 'Digital Goods',
+                        backgroundColor     : 'rgba(60,141,188,0.9)',
+                        borderColor         : 'rgba(60,141,188,0.8)',
+                        pointRadius          : false,
+                        pointColor          : '#3b8bba',
+                        pointStrokeColor    : 'rgba(60,141,188,1)',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data                : [28, 48, 40, 19, 86, 27, 90, 65, 59, 80, 81, 56]
+                    },
+                    {
+                        label               : 'Electronics',
+                        backgroundColor     : 'rgba(210, 214, 222, 1)',
+                        borderColor         : 'rgba(210, 214, 222, 1)',
+                        pointRadius         : false,
+                        pointColor          : 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor    : '#c1c7d1',
+                        pointHighlightFill  : '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data                : [65, 59, 80, 81, 56, 55, 40, 28, 48, 40, 19, 86]
+                    },
+                ]
+            }
+
+            var areaChartOptions = {
+                maintainAspectRatio : false,
+                responsive : true,
+                legend: {
+                    display: false
+                },
+                scales: {
+                    xAxes: [{
+                        gridLines : {
+                            display : false,
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines : {
+                            display : false,
+                        }
+                    }]
+                }
+            }
+
+
+            //-------------
+            //- LINE CHART -
+            //--------------
+            var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+            var lineChartOptions = $.extend(true, {}, areaChartOptions)
+            var lineChartData = $.extend(true, {}, areaChartData)
+            lineChartData.datasets[0].fill = false;
+            lineChartData.datasets[1].fill = false;
+            lineChartOptions.datasetFill = false
+
+            var lineChart = new Chart(lineChartCanvas, {
+                type: 'line',
+                data: lineChartData,
+                options: lineChartOptions
             })
         });
         /*]]>*/
