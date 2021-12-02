@@ -20,8 +20,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "unit_id")
+    @Column(name = "unit")
+    @Enumerated(EnumType.STRING)
     private Unit unit;
 
     @Basic

@@ -17,17 +17,13 @@ ALTER TABLE `customers`
 ALTER TABLE `types`
   ADD PRIMARY KEY (`id`);
 
-ALTER TABLE `units`
-  ADD PRIMARY KEY (`id`);
-
 ALTER TABLE `product_types`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`),
   ADD KEY `type_id` (`type_id`);
 
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `unit_id` (`unit_id`);
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `expenses`
   ADD PRIMARY KEY (`id`),
@@ -36,13 +32,11 @@ ALTER TABLE `expenses`
 ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`),
   ADD KEY `expense_id` (`expense_id`),
-  ADD KEY `product_id` (`product_id`),
-  ADD KEY `unit_id` (`unit_id`);
+  ADD KEY `product_id` (`product_id`);
 
 ALTER TABLE `stocks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `purchase_id` (`purchase_id`),
-  ADD KEY `unit_id` (`unit_id`);
+  ADD KEY `purchase_id` (`purchase_id`);
 
 ALTER TABLE `incomes`
   ADD PRIMARY KEY (`id`),
@@ -58,8 +52,7 @@ ALTER TABLE `seller_commissions`
 ALTER TABLE `sales`
   ADD PRIMARY KEY (`id`),
   ADD KEY `income_id` (`income_id`),
-  ADD KEY `stock_id` (`stock_id`),
-  ADD KEY `unit_id` (`unit_id`);
+  ADD KEY `stock_id` (`stock_id`);
 
 ALTER TABLE `working_hours`
   ADD PRIMARY KEY (`id`),
@@ -90,9 +83,6 @@ ALTER TABLE `customers`
 
 ALTER TABLE `types`
   MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=6;
-
-ALTER TABLE `units`
-  MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 ALTER TABLE `product_types`
   MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=11;
@@ -137,20 +127,15 @@ ALTER TABLE `product_types`
   ADD CONSTRAINT `product_type_fk_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `product_type_fk_type` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`);
 
-ALTER TABLE `products`
-  ADD CONSTRAINT `product_fk_unit` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`);
-
 ALTER TABLE `expenses`
   ADD CONSTRAINT `expense_fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `purchases`
   ADD CONSTRAINT `purchase_fk_expense` FOREIGN KEY (`expense_id`) REFERENCES `expenses` (`id`),
-  ADD CONSTRAINT `purchase_fk_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
-  ADD CONSTRAINT `purchase_fk_unit` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`);
+  ADD CONSTRAINT `purchase_fk_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 ALTER TABLE `stocks`
-  ADD CONSTRAINT `stock_fk_purchase` FOREIGN KEY (`purchase_id`) REFERENCES `purchases` (`id`),
-  ADD CONSTRAINT `stock_fk_unit` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`);
+  ADD CONSTRAINT `stock_fk_purchase` FOREIGN KEY (`purchase_id`) REFERENCES `purchases` (`id`);
 
 ALTER TABLE `incomes`
   ADD CONSTRAINT `income_fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
@@ -163,8 +148,7 @@ ALTER TABLE `seller_commissions`
 
 ALTER TABLE `sales`
   ADD CONSTRAINT `sale_fk_income` FOREIGN KEY (`income_id`) REFERENCES `incomes` (`id`),
-  ADD CONSTRAINT `sale_fk_stock` FOREIGN KEY (`stock_id`) REFERENCES `stocks` (`id`),
-  ADD CONSTRAINT `sale_fk_unit` FOREIGN KEY (`unit_id`) REFERENCES `units` (`id`);
+  ADD CONSTRAINT `sale_fk_stock` FOREIGN KEY (`stock_id`) REFERENCES `stocks` (`id`);
 
 ALTER TABLE `working_hours`
   ADD CONSTRAINT `working_hour_fk_worker` FOREIGN KEY (`worker_id`) REFERENCES `users` (`id`);

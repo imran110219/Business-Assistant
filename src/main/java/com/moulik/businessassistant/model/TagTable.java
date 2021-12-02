@@ -3,7 +3,6 @@ package com.moulik.businessassistant.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Objects;
 
 /**
@@ -15,25 +14,21 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "stocks")
-public class Stock {
+@Table(name = "tag_tables")
+public class TagTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "purchase_id")
-    private Purchase purchase;
-
-    @Column(name = "unit")
-    @Enumerated(EnumType.STRING)
-    private Unit unit;
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
 
     @Basic
-    @Column(name = "quantity")
-    private double quantity;
+    @Column(name = "table_id")
+    private long tableId;
 
     @Basic
-    @Column(name = "datetime")
-    private Timestamp datetime;
+    @Column(name = "score")
+    private long score;
 }

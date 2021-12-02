@@ -29,8 +29,8 @@ public class Sale {
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "unit_id")
+    @Column(name = "unit")
+    @Enumerated(EnumType.STRING)
     private Unit unit;
 
     @Basic

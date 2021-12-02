@@ -57,12 +57,6 @@ INSERT  INTO `types`(`id`,`name`,`description`) VALUES
 (4,'Face Solution','Face Solution Description'),
 (5,'Herbal Medicine','Herbal Medicine Description');
 
-INSERT  INTO `units`(`id`,`name`) VALUES
-(1,'gm'),
-(2,'Kg'),
-(3,'ml'),
-(4,'L');
-
 INSERT  INTO `product_types`(`id`,`product_id`,`type_id`) VALUES
 (1,1,4),
 (2,2,4),
@@ -75,17 +69,17 @@ INSERT  INTO `product_types`(`id`,`product_id`,`type_id`) VALUES
 (9,9,4),
 (10,10,3);
 
-INSERT  INTO `products`(`id`,`unit_id`,`name`,`bn_name`,`purchase_price`,`sale_price`,`percentage`) VALUES
-(1,1,'Rose Petal Powder','গোলাপ গুড়া',70,140,15),
-(2,1,'Fullers Earth Powder','মুলতানি মাটি গুড়া',40,80,15),
-(3,1,'Fenugreek Seed Powder','মেথি গুড়া',25,50,15),
-(4,1,'Masoor Dal Powder','মসুর ডাল',15,30,15),
-(5,1,'Potatoes Powder','আলু গুড়া',90,180,15),
-(6,1,'Ginger Powder','আদা গুড়া',55,110,15),
-(7,1,'Shikkai Powder','শিককাই গুড়া',70,140,15),
-(8,1,'Triphala Powder','ত্রিফলা গুড়া',45,90,15),
-(9,1,'Cinnamon Powder','দারুচিনি গুড়া',40,80,15),
-(10,1,'Haratki Powder','হরতকি গুড়া',35,70,15);
+INSERT  INTO `products`(`id`,`unit`,`name`,`bn_name`,`purchase_price`,`sale_price`,`percentage`) VALUES
+(1,'gm','Rose Petal Powder','গোলাপ গুড়া',70,140,15),
+(2,'gm','Fullers Earth Powder','মুলতানি মাটি গুড়া',40,80,15),
+(3,'gm','Fenugreek Seed Powder','মেথি গুড়া',25,50,15),
+(4,'gm','Masoor Dal Powder','মসুর ডাল',15,30,15),
+(5,'gm','Potatoes Powder','আলু গুড়া',90,180,15),
+(6,'gm','Ginger Powder','আদা গুড়া',55,110,15),
+(7,'gm','Shikkai Powder','শিককাই গুড়া',70,140,15),
+(8,'gm','Triphala Powder','ত্রিফলা গুড়া',45,90,15),
+(9,'gm','Cinnamon Powder','দারুচিনি গুড়া',40,80,15),
+(10,'gm','Haratki Powder','হরতকি গুড়া',35,70,15);
 
 INSERT  INTO `customers`(`id`,`full_name`,`phone`,`email`,`address`) VALUES
 (1,'Sadman Sobhan','01711123456','sadman@email.com','Dhaka'),

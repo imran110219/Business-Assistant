@@ -29,8 +29,7 @@ public class Purchase {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "unit_id")
+    @Enumerated(EnumType.STRING)
     private Unit unit;
 
     @Basic

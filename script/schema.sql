@@ -73,15 +73,6 @@ CREATE TABLE `types` (
   `description` VARCHAR(500) DEFAULT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 
-/*Table structure for table `units` */
-
-DROP TABLE IF EXISTS `units`;
-
-CREATE TABLE `units` (
-  `id` INT(11),
-  `name` VARCHAR(100) NOT NULL
-) ENGINE=INNODB DEFAULT CHARSET=utf8;
-
 /*Table structure for table `product_types` */
 
 DROP TABLE IF EXISTS `product_types`;
@@ -98,7 +89,7 @@ DROP TABLE IF EXISTS `products`;
 
 CREATE TABLE `products` (
   `id` INT(11),
-  `unit_id` INT(11) NOT NULL,
+  `unit` VARCHAR(100) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `bn_name` VARCHAR(100) NOT NULL,
   `purchase_price` DOUBLE NOT NULL,
@@ -126,7 +117,7 @@ CREATE TABLE `purchases` (
   `id` INT(11),
   `expense_id` INT(11) NOT NULL,
   `product_id` INT(11) NOT NULL,
-  `unit_id` INT(11) NOT NULL,
+  `unit` VARCHAR(100) NOT NULL,
   `quantity` DOUBLE NOT NULL,
   `unit_price` DOUBLE DEFAULT NULL,
   `total` DOUBLE NOT NULL,
@@ -141,7 +132,7 @@ DROP TABLE IF EXISTS `stocks`;
 CREATE TABLE `stocks` (
   `id` INT(11),
   `purchase_id` INT(11) NOT NULL,
-  `unit_id` INT(11) NOT NULL,
+  `unit` VARCHAR(100) NOT NULL,
   `quantity` DOUBLE NOT NULL,
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
@@ -182,7 +173,7 @@ CREATE TABLE `sales` (
   `id` INT(11),
   `income_id` INT(11) NOT NULL,
   `stock_id` INT(11) NOT NULL,
-  `unit_id` INT(11) NOT NULL,
+  `unit` VARCHAR(100) NOT NULL,
   `quantity` DOUBLE NOT NULL,
   `unit_price` DOUBLE NOT NULL,
   `discount` DOUBLE NOT NULL,
