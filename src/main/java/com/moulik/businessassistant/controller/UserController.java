@@ -32,6 +32,18 @@ public class UserController {
         return "user";
     }
 
+    @PostMapping(value="/users/checkEmail")
+    public ResponseEntity<Boolean> checkEmail(String email){
+        boolean isEmail = !userService.existsByEmail(email);
+        return new ResponseEntity<>(isEmail, HttpStatus.OK);
+    }
+
+    @PostMapping(value="/users/checkUsername")
+    public ResponseEntity<Boolean> checkUsername(String username){
+        boolean isUsername = !userService.existsByUserName(username);
+        return new ResponseEntity<>(isUsername, HttpStatus.OK);
+    }
+
     @PostMapping(value="/users/add")
     public ResponseEntity<String> addUser(User user){
         userService.createUser(user);
