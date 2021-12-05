@@ -33,6 +33,10 @@ public class Product {
     private String bnName;
 
     @Basic
+    @Column(name = "sku")
+    private String sku;
+
+    @Basic
     @Column(name = "purchase_price")
     private double purchasePrice;
 

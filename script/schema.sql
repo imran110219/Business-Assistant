@@ -92,6 +92,7 @@ CREATE TABLE `products` (
   `unit` VARCHAR(100) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `bn_name` VARCHAR(100) NOT NULL,
+  `sku` VARCHAR(50) Default NULL,
   `purchase_price` DOUBLE NOT NULL,
   `sale_price` DOUBLE NOT NULL,
   `percentage` DOUBLE NOT NULL

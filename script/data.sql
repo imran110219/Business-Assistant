@@ -69,17 +69,17 @@ INSERT  INTO `product_types`(`id`,`product_id`,`type_id`) VALUES
 (9,9,4),
 (10,10,3);
 
-INSERT  INTO `products`(`id`,`unit`,`name`,`bn_name`,`purchase_price`,`sale_price`,`percentage`) VALUES
-(1,'gm','Rose Petal Powder','গোলাপ গুড়া',70,140,15),
-(2,'gm','Fullers Earth Powder','মুলতানি মাটি গুড়া',40,80,15),
-(3,'gm','Fenugreek Seed Powder','মেথি গুড়া',25,50,15),
-(4,'gm','Masoor Dal Powder','মসুর ডাল',15,30,15),
-(5,'gm','Potatoes Powder','আলু গুড়া',90,180,15),
-(6,'gm','Ginger Powder','আদা গুড়া',55,110,15),
-(7,'gm','Shikkai Powder','শিককাই গুড়া',70,140,15),
-(8,'gm','Triphala Powder','ত্রিফলা গুড়া',45,90,15),
-(9,'gm','Cinnamon Powder','দারুচিনি গুড়া',40,80,15),
-(10,'gm','Haratki Powder','হরতকি গুড়া',35,70,15);
+INSERT  INTO `products`(`id`,`unit`,`name`,`bn_name`,`sku`,`purchase_price`,`sale_price`,`percentage`) VALUES
+(1,'gm','Rose Petal Powder','গোলাপ গুড়া','RPP',70,140,15),
+(2,'gm','Fullers Earth Powder','মুলতানি মাটি গুড়া','FEP',40,80,15),
+(3,'gm','Fenugreek Seed Powder','মেথি গুড়া','FSP',25,50,15),
+(4,'gm','Masoor Dal Powder','মসুর ডাল','MDP',15,30,15),
+(5,'gm','Potatoes Powder','আলু গুড়া','PP',90,180,15),
+(6,'gm','Ginger Powder','আদা গুড়া','Gp',55,110,15),
+(7,'gm','Shikkai Powder','শিককাই গুড়া','SP',70,140,15),
+(8,'gm','Triphala Powder','ত্রিফলা গুড়া','TP',45,90,15),
+(9,'gm','Cinnamon Powder','দারুচিনি গুড়া','CP',40,80,15),
+(10,'gm','Haratki Powder','হরতকি গুড়া','HP',35,70,15);
 
 INSERT  INTO `customers`(`id`,`full_name`,`phone`,`email`,`address`) VALUES
 (1,'Sadman Sobhan','01711123456','sadman@email.com','Dhaka'),

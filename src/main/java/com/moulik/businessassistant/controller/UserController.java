@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,6 +31,13 @@ public class UserController {
         model.addAttribute("roles", roleList);
         model.addAttribute("users", list);
         return "user";
+    }
+
+    @GetMapping(value={"/login","/"})
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
     @PostMapping(value="/users/checkEmail")

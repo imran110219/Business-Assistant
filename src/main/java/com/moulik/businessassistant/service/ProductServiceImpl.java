@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
                 .map(product -> {
                     product.setName(newProduct.getName());
                     product.setBnName(newProduct.getBnName());
+                    product.setSku(newProduct.getSku());
                     product.setPercentage(newProduct.getPercentage());
                     product.setPurchasePrice(newProduct.getPurchasePrice());
                     product.setSalePrice(newProduct.getSalePrice());

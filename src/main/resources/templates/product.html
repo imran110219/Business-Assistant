@@ -65,6 +65,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Bangla Name</th>
+                                        <th>SKU</th>
                                         <th>Unit</th>
                                         <th>purchase</th>
                                         <th>Sale</th>
@@ -76,6 +77,7 @@
                                     <tr th:id="${product.id}" th:each="product : ${products}">
                                         <td th:id="'name'+${product.id}" th:text="${product.name}"></td>
                                         <td th:id="'bn_name'+${product.id}" th:text="${product.bnName}"></td>
+                                        <td th:id="'sku'+${product.id}" th:text="${product.sku}"></td>
                                         <td th:id="'unit'+${product.id}" th:text="${product.unit.name}"></td>
                                         <td th:id="'purchase'+${product.id}" th:text="${product.purchasePrice}"></td>
                                         <td th:id="'sale'+${product.id}" th:text="${product.salePrice}"></td>
@@ -105,6 +107,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Bangla Name</th>
+                                        <th>SKU</th>
                                         <th>Unit</th>
                                         <th>purchase</th>
                                         <th>Sale</th>
