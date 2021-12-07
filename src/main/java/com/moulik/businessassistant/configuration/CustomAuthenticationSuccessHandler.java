@@ -22,10 +22,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
-        if (roles.contains("USER")) {
-            httpServletResponse.sendRedirect("/pos");
-        } else {
+        if (roles.contains("INVESTOR")) {
             httpServletResponse.sendRedirect("/dashboard");
+        } else {
+            httpServletResponse.sendRedirect("/users");
         }
     }
 }

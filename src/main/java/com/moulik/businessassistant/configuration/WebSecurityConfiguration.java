@@ -52,7 +52,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                        "/stocks/**","/suppliers/**","/saleinvoices/**", "/purchaseinvoices/**",
 //                        "/purchases/**","/sales/**","/returns/**","/users/**").hasAnyAuthority("ADMIN","SUPER_ADMIN")
 //                .antMatchers("/stocks/**","/pos/**","/pop/**","/por/**").hasAnyAuthority("USER","SUPER_ADMIN")
-                .antMatchers("/users/**","/generics/**","/indications/**").hasAuthority("SUPER_ADMIN")
+                .antMatchers("/users/**","/customers/**").hasAuthority("SUPER_ADMIN")
 
                 .anyRequest()
                 .authenticated()
