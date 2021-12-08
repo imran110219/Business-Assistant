@@ -17,6 +17,7 @@ public interface UserService {
     User findUserByUserName(String userName);
     User saveUser(User user);
     List<User> getAllUsers();
+    List<User> getAllUsersByRoleId(long roleId);
     User getUserById(Long id) throws RecordNotFoundException;
     User createUser(User user);
     User updateUser(User newUser, Long id);

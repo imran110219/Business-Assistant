@@ -71,10 +71,29 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <div class="col-sm-2 col-md-1">
-                                    <button type="button" class="btn btn-block btn-success btn-sm"
-                                            data-toggle="modal" data-target="#modal-add">Add
-                                    </button>
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-1">
+                                        <button type="button" class="btn btn-block btn-success btn-sm"
+                                                data-toggle="modal" data-target="#modal-add">Add
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-18 col-md-9">
+                                    </div>
+                                    <div class="col-sm-4 col-md-2">
+                                        <!-- select -->
+                                        <div class="form-group">
+<!--                                            <label>Select</label>-->
+                                            <select class="form-control" onchange="loadUser(this.value);">
+                                                <option>All</option>
+                                                <option>option 2</option>
+                                                <option value=""> --</option>
+                                                <option th:each="role : ${roles}"
+                                                        th:value="${role.id}"
+                                                        th:title="${role.name}"
+                                                        th:utext="${role.id}">
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -638,6 +657,11 @@
                 });
             });
         });
+
+        function loadUser(value) {
+            alert(value);
+            // window.location.href = "/stocks/out";
+        }
     </script>
 </th:block>
 </body>

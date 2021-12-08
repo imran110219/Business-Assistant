@@ -53,4 +53,15 @@ public class RepositoryTest {
             System.out.println(investor);
         }
     }
+
+    @Test
+    public void findUserListByRoleIdTest() {
+        Set<Role> roles = new HashSet<>();
+        Role role = roleRepository.getById(1L);
+        roles.add(role);
+        List<User> userList = userRepository.findAllByRoles(roles);
+        for (User user : userList){
+            System.out.println(user.getUserName());
+        }
+    }
 }

@@ -18,5 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUserName(String username);
     @Query("SELECT userName FROM User order by userName")
     List<String> getUserList();
-
+    List<User> findAllByRoles(Set<Role> roles);
 }

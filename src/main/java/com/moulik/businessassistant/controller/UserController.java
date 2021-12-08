@@ -33,6 +33,16 @@ public class UserController {
         return "user";
     }
 
+    @GetMapping("/users/role/{id}")
+    public String getAllUsersByRole(Model model, @PathVariable(value = "id") Long roleId) {
+        List<User> list = userService.getAllUsersByRoleId(roleId);
+        List<Role> roleList = roleService.getAllRoles();
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", roleList);
+        model.addAttribute("users", list);
+        return "user";
+    }
+
     @GetMapping(value={"/login","/"})
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView();
