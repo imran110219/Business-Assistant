@@ -64,6 +64,7 @@
                                     <thead>
                                     <tr>
                                         <th>Purchase Id</th>
+                                        <th>Store</th>
                                         <th>Unit</th>
                                         <th>Quantity</th>
                                         <th>Date</th>
@@ -73,6 +74,7 @@
                                     <tbody>
                                     <tr th:id="${stock.id}" th:each="stock : ${stocks}">
                                         <td th:id="'purchase'+${stock.id}" th:text="${stock.purchase.id}"></td>
+                                        <td th:id="'store'+${stock.id}" th:text="${stock.store.name}"></td>
                                         <td th:id="'unit'+${stock.id}" th:text="${stock.unit.name}"></td>
                                         <td th:id="'quantity'+${stock.id}" th:text="${stock.quantity}"></td>
                                         <td th:id="'date'+${stock.id}" th:text="${stock.datetime}"></td>

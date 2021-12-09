@@ -9,6 +9,7 @@ import com.moulik.businessassistant.util.DataUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -55,11 +56,11 @@ public class RepositoryTest {
     }
 
     @Test
+    @Transactional
     public void findUserListByRoleIdTest() {
-        Set<Role> roles = new HashSet<>();
-        Role role = roleRepository.getById(1L);
-        roles.add(role);
-        List<User> userList = userRepository.findAllByRoles(roles);
+        List<Long> roles = new ArrayList<>();
+        roles.add(2L);
+        List<User> userList = userRepository.findByRoleId(roles);
         for (User user : userList){
             System.out.println(user.getUserName());
         }

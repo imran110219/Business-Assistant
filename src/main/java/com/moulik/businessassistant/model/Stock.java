@@ -25,6 +25,10 @@ public class Stock {
     @JoinColumn(name = "purchase_id")
     private Purchase purchase;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
     @Column(name = "unit")
     @Enumerated(EnumType.STRING)
     private Unit unit;

@@ -9,9 +9,7 @@ import com.moulik.businessassistant.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -51,10 +49,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUsersByRoleId(long roleId) {
-        Set<Role> roles = new HashSet<>();
-        Role role = roleRepository.getById(roleId);
-        roles.add(role);
-        return userRepository.findAllByRoles(roles);
+        List<Long> roles = new ArrayList<>();
+        Role role = roleRepository.getById(1L);
+        roles.add(role.getId());
+        return userRepository.findByRoleId(roles);
     }
 
     public User getUserById(Long id) throws RecordNotFoundException {

@@ -133,8 +133,20 @@ DROP TABLE IF EXISTS `stocks`;
 CREATE TABLE `stocks` (
   `id` INT(11),
   `purchase_id` INT(11) NOT NULL,
+  `store_id` INT(11) NOT NULL,
   `unit` VARCHAR(100) NOT NULL,
   `quantity` DOUBLE NOT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `stores` */
+
+DROP TABLE IF EXISTS `stores`;
+
+CREATE TABLE `stores` (
+  `id` INT(11),
+  `name` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(500) NOT NULL,
   `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=INNODB DEFAULT CHARSET=utf8;
 

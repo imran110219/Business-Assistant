@@ -83,14 +83,12 @@
                                         <!-- select -->
                                         <div class="form-group">
 <!--                                            <label>Select</label>-->
-                                            <select class="form-control" onchange="loadUser(this.value);">
+                                            <select class="form-control" onchange="loadUserByRole(this.value);">
                                                 <option>All</option>
-                                                <option>option 2</option>
-                                                <option value=""> --</option>
                                                 <option th:each="role : ${roles}"
                                                         th:value="${role.id}"
                                                         th:title="${role.name}"
-                                                        th:utext="${role.id}">
+                                                        th:utext="${role.name}">
                                             </select>
                                         </div>
                                     </div>
@@ -658,9 +656,8 @@
             });
         });
 
-        function loadUser(value) {
-            alert(value);
-            // window.location.href = "/stocks/out";
+        function loadUserByRole(value) {
+            window.location.href = "/users/role/"+value;
         }
     </script>
 </th:block>

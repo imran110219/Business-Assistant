@@ -36,7 +36,11 @@ ALTER TABLE `purchases`
 
 ALTER TABLE `stocks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `purchase_id` (`purchase_id`);
+  ADD KEY `purchase_id` (`purchase_id`),
+  ADD KEY `store_id` (`store_id`);
+
+ALTER TABLE `stores`
+  ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `incomes`
   ADD PRIMARY KEY (`id`),
@@ -99,6 +103,9 @@ ALTER TABLE `purchases`
 ALTER TABLE `stocks`
   MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+ALTER TABLE `stores`
+  MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=1;
+
 ALTER TABLE `incomes`
   MODIFY `id` INT(11) AUTO_INCREMENT, AUTO_INCREMENT=1;
 
@@ -135,7 +142,8 @@ ALTER TABLE `purchases`
   ADD CONSTRAINT `purchase_fk_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 ALTER TABLE `stocks`
-  ADD CONSTRAINT `stock_fk_purchase` FOREIGN KEY (`purchase_id`) REFERENCES `purchases` (`id`);
+  ADD CONSTRAINT `stock_fk_purchase` FOREIGN KEY (`purchase_id`) REFERENCES `purchases` (`id`),
+  ADD CONSTRAINT `stock_fk_store` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`);
 
 ALTER TABLE `incomes`
   ADD CONSTRAINT `income_fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
