@@ -35,12 +35,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3 class="m-0">Seller Commission List</h3>
+                        <h3 class="m-0">Tag List</h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Seller Commission List</li>
+                            <li class="breadcrumb-item active">Tag List</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -64,21 +64,21 @@
                                     <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Seller</th>
-                                        <th>Product</th>
-                                        <th>Date</th>
+                                        <th>Table</th>
+                                        <th>Description</th>
+                                        <th>Score</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:id="${sellerCommission.id}" th:each="sellerCommission : ${sellerCommissions}">
-                                        <td th:id="'seller'+${sellerCommission.id}" th:text="${sellerCommission.seller.userName}"></td>
-                                        <td th:id="'product'+${sellerCommission.id}" th:text="${sellerCommission.product.name}"></td>
-                                        <td th:id="'amount'+${sellerCommission.id}" th:text="${sellerCommission.amount}"></td>
-                                        <td th:id="'date'+${sellerCommission.id}" th:text="${sellerCommission.datetime}"></td>
+                                    <tr th:id="${tag.id}" th:each="tag : ${tags}">
+                                        <td th:id="'name'+${tag.id}" th:text="${tag.name}"></td>
+                                        <td th:id="'tableName'+${tag.id}" th:text="${tag.tableName}"></td>
+                                        <td th:id="'description'+${tag.id}" th:text="${tag.description}"></td>
+                                        <td th:id="'score'+${tag.id}" th:text="${tag.score}"></td>
                                         <td>
                                             <div class="btn-group">
-                                                <input type="hidden" id="userId" th:value="${unit.id}">
+                                                <input type="hidden" id="userId" th:value="${tag.id}">
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
@@ -100,9 +100,9 @@
                                     <tfoot>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Seller</th>
-                                        <th>Product</th>
-                                        <th>Date</th>
+                                        <th>Table</th>
+                                        <th>Description</th>
+                                        <th>Score</th>
                                         <th>Action</th>
                                     </tr>
                                     </tfoot>
@@ -144,31 +144,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/dataTables.buttons.min.js"
             integrity="sha512-dDM0yJk5qN8gaaUywkA8C9CSv9l3C0cf+2qSgKzbLMMi//6RFgd+mcDT9rYdtAtK6H0NH48lS4jbJA1sLnUBHw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.js"
             integrity="sha512-D4MloW0hy9XtYnqtvwfg2T2WZRn0dB8Ir0KcPrDX7S/gVE05JotZQHirzd9vMSIT8ViKyntOOZl1muHii0spUA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/jszip/jszip.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"
             integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"
             integrity="sha512-Yf733gmgLgGUo+VfWq4r5HAEaxftvuTes86bKvwTpqOY3oH0hHKtX/9FfKYUcpaxeBJxeXvcN4EY3J6fnmc9cA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/vfs_fonts.js"
             integrity="sha512-cktKDgjEiIkPVHYbn8bh/FEyYxmt4JDJJjOCu5/FQAkW4bc911XtKYValiyzBiJigjVEvrIAyQFEbRJZyDA1wQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.html5.min.js"
             integrity="sha512-ZUGQhhVpnt2+pGfdtbxpt4BBUic1COXkzPUNW/fRAB2lHS+GqxsuVBDVdtwSS0HVnjoRsmo4xAl1aRjHsFTirw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.print.min.js"
             integrity="sha512-VpZVjReV4WlkVWNMq5Bdhg3SmA9DwzA/NyNlzqguI/hAni9s3++rgHEr7XZHXEJl/Y4IZWTVNWy/7Jy9uQPLMA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.colVis.min.js"
             integrity="sha512-ll1/he+7pNOn7mpHZxOpCdV6HB+BNYs9rcDeHZSTV33/JHJIET2HCSjbCXREbl0LteZVQpg+zgpAlIABGXL/ow=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>

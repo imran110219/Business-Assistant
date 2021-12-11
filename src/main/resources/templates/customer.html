@@ -22,6 +22,10 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.css"
               integrity="sha512-0LpZpPhy5gC20rXCT9HfsYz0gF+wRD62I/MCY+d1tDgK7xKpvd0hQLMBqyXS9BYdzyis/BdIW2iMIBK8e+0o+Q=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <!-- Toastr -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"
+              integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
     </th:block>
 </head>
 
@@ -35,12 +39,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h3 class="m-0">customer List</h3>
+                        <h3 class="m-0">Customer List</h3>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">customer List</li>
+                            <li class="breadcrumb-item active">Customer List</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -55,12 +59,20 @@
                     <div class="col-12">
 
                         <div class="card">
-                            <!-- <div class="card-header">
-                              <h3 class="card-title">DataTable with default features</h3>
-                            </div> -->
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-1">
+                                        <button type="button" class="btn btn-block btn-success btn-sm"
+                                                data-toggle="modal" data-target="#modal-add">Add
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-22 col-md-11">
+                                    </div>
+                                </div>
+                            </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="customerTable" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
                                         <th>Full Name</th>
@@ -78,19 +90,25 @@
                                         <td th:id="'address'+${customer.id}" th:text="${customer.address}"></td>
                                         <td>
                                             <div class="btn-group">
-                                                <input type="hidden" id="userId" th:value="${customer.id}">
+                                                <input type="hidden" id="customerId" th:value="${customer.id}">
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
-                                                ><i class="fas fa-eye"></i>
+                                                        data-toggle="modal" data-target="#modal-view"
+                                                        th:attrappend="data-customer-id=${customer.id}">
+                                                    <i class="fas fa-eye"></i>
                                                 </button>
                                                 <button type="button" id="btnEdit"
                                                         class="btn btn-block btn-primary btn-sm"
-                                                        style="margin-top: 8px"><i
-                                                        class="fas fa-edit"></i>
+                                                        style="margin-top: 8px"
+                                                        data-toggle="modal" data-target="#modal-edit"
+                                                        th:attrappend="data-customer-id=${customer.id}">
+                                                    <i class="fas fa-edit"></i>
                                                 </button>
                                                 <button type="button" id="btnDelete"
-                                                        class="btn btn-block btn-danger btn-sm"><i
+                                                        class="btn btn-block btn-danger btn-sm"
+                                                        data-toggle="modal" data-target="#modal-delete"
+                                                        th:attrappend="data-customer-id=${customer.id}"><i
                                                         class="fas fa-trash"></i>
                                                 </button>
                                             </div>
@@ -117,6 +135,179 @@
                 <!-- /.col-md-6 -->
             </div>
             <!-- /.row -->
+
+            <div class="modal fade" id="modal-add">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Customer</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="addForm" th:action="@{/customers/add}" th:object="${customer}" method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputfullname">Full Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{fullName}" class="form-control"
+                                               id="a-inputfullname" name="fullname"
+                                               placeholder="Enter First Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputemail">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" th:field="*{email}" class="form-control" id="a-inputemail"
+                                               name="email"
+                                               placeholder="Enter Email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputphone">Phone</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{phone}" class="form-control" id="a-inputphone"
+                                               name="phone"
+                                               placeholder="Enter Phone">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputaddress">Address</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{address}" class="form-control"
+                                               id="a-inputaddress"
+                                               name="address"
+                                               placeholder="Enter Address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="btnAdd" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal-edit">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Customer</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="editForm" th:object="${customer}">
+                            <div class="modal-body">
+                                <input type="hidden" id="inputid1"/>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputfullname">First Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{fullName}" class="form-control"
+                                               id="e-inputfullname" name="fullName"
+                                               placeholder="Enter Full Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputemail">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" th:field="*{email}" class="form-control" id="e-inputemail"
+                                               name="email"
+                                               placeholder="Enter Email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputphone">Phone</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{phone}" class="form-control" id="e-inputphone"
+                                               name="phone"
+                                               placeholder="Enter Phone">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputaddress">Address</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{address}" class="form-control"
+                                               id="e-inputaddress"
+                                               name="address"
+                                               placeholder="Enter Address">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="confirmEdit" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal-view">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">View Customer</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="viewForm">
+                            <div class="modal-body">
+                                <input type="hidden" id="v-inputid"/>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputfullname">Full Name</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputfullname"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputemail">Email</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputemail"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputphone">Phone</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputphone"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputaddress">Address</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputaddress"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal-delete">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Customer</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Delete this customer?</p>
+                            <input type="hidden" id="customerId"/>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button id="confirmDelete" type="submit" class="btn btn-primary">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -129,6 +320,13 @@
 <!-- REQUIRED SCRIPTS -->
 
 <th:block layout:fragment="script">
+    <!-- jquery-validation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+            integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
+            integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- DataTables  & Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
             integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
@@ -173,12 +371,214 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.colVis.min.js"
             integrity="sha512-ll1/he+7pNOn7mpHZxOpCdV6HB+BNYs9rcDeHZSTV33/JHJIET2HCSjbCXREbl0LteZVQpg+zgpAlIABGXL/ow=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+            integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(function () {
-            $("#example1").DataTable({
+            $("#customerTable").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#customerTable_wrapper .col-md-6:eq(0)');
+        });
+
+        $(document).on("click", "#btnView", function () {
+            var customerId = $(this).data('customer-id');
+
+            $.ajax({
+                type: 'GET',
+                url: "/customers/" + customerId,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $('#v-inputid').val(data.id);
+                    $("#v-inputfullname").text(data.fullName)
+                    $('#v-inputemail').text(data.email);
+                    $('#v-inputphone').text(data.phone);
+                    $('#v-inputaddress').text(data.address);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        $('#addForm').validate({
+            rules: {
+                fullName: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                phone: {
+                    required: true
+                },
+                address: {
+                    required: true
+                }
+            },
+            messages: {
+                fullName: {
+                    required: "Please enter a full name"
+                },
+                email: {
+                    required: "Please enter a email address",
+                    email: "Please enter a vaild email address"
+                },
+                phone: {
+                    required: "Please enter a phone number"
+                },
+                address: {
+                    required: "Please enter a address"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        $('#modal-add').modal('hide');
+                        toastr.success(data);
+                        setTimeout(function () {
+                            location.reload();  //Refresh page
+                        }, 3000);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+
+        $(document).on("click", "#btnEdit", function () {
+            var customerId = $(this).data('customer-id');
+
+            $.ajax({
+                type: 'GET',
+                url: "/customers/" + customerId,
+                dataType: "json",
+                success: function (data) {
+                    $('#inputid1').val(data.id);
+                    $('#e-inputfullname').val(data.fullName);
+                    $('#e-inputemail').val(data.email);
+                    $('#e-inputphone').val(data.phone);
+                    $('#e-inputaddress').val(data.address);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        $('#editForm').validate({
+            rules: {
+                fullName: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                phone: {
+                    required: true
+                },
+                address: {
+                    required: true
+                }
+            },
+            messages: {
+                fullName: {
+                    required: "Please enter a full name"
+                },
+                email: {
+                    required: "Please enter a email address",
+                    email: "Please enter a vaild email address"
+                },
+                phone: {
+                    required: "Please enter a phone number"
+                },
+                address: {
+                    required: "Please enter a address"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            },
+            submitHandler: function (form) {
+                var customerId = document.getElementById("inputid1").value;
+
+                var formData = {
+                    fullName: $("#e-inputfullname").val(),
+                    email: $("#e-inputemail").val(),
+                    phone: $("#e-inputphone").val(),
+                    address: $("#e-inputaddress").val()
+                };
+
+                console.log(formData);
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/customers/edit/" + customerId,
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $('#modal-edit').modal('hide');
+                        toastr.success(data);
+                        setTimeout(function () {
+                            location.reload();  //Refresh page
+                        }, 3000); //3 Second
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+
+        $(document).on("click", "#btnDelete", function () {
+            var customerId = $(this).data('customer-id');
+            $('#customerId').val(customerId);
+        });
+
+        $(document).on("click", "#confirmDelete", function () {
+            var customerId = document.getElementById("customerId").value;
+
+            $.ajax({
+                type: "DELETE",
+                url: "/customers/delete/" + customerId,
+                success: function (data) {
+                    console.log(data);
+                    $('#modal-delete').modal('hide');
+                    $('table#customerTable tr#' + customerId).remove();
+                    toastr.success(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
         });
     </script>
 </th:block>
