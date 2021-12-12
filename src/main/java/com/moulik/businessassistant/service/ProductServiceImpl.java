@@ -24,7 +24,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProductById(Long id) throws RecordNotFoundException {
-        return productRepository.getById(id);
+        return productRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
+
     }
 
     @Override

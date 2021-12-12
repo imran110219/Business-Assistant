@@ -22,6 +22,18 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.css"
               integrity="sha512-0LpZpPhy5gC20rXCT9HfsYz0gF+wRD62I/MCY+d1tDgK7xKpvd0hQLMBqyXS9BYdzyis/BdIW2iMIBK8e+0o+Q=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <!-- Toastr -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"
+              integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <!-- Select2 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+              integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css"
+              integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
     </th:block>
 </head>
 
@@ -55,12 +67,19 @@
                     <div class="col-12">
 
                         <div class="card">
-                            <!-- <div class="card-header">
-                              <h3 class="card-title">DataTable with default features</h3>
-                            </div> -->
-                            <!-- /.card-header -->
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-1">
+                                        <button type="button" class="btn btn-block btn-success btn-sm"
+                                                data-toggle="modal" data-target="#modal-add">Add
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-22 col-md-11">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="productTable" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
                                         <th>Name</th>
@@ -88,15 +107,21 @@
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
-                                                ><i class="fas fa-eye"></i>
+                                                        data-toggle="modal" data-target="#modal-view"
+                                                        th:attrappend="data-product-id=${product.id}">
+                                                    <i class="fas fa-eye"></i>
                                                 </button>
                                                 <button type="button" id="btnEdit"
                                                         class="btn btn-block btn-primary btn-sm"
-                                                        style="margin-top: 8px"><i
-                                                        class="fas fa-edit"></i>
+                                                        style="margin-top: 8px"
+                                                        data-toggle="modal" data-target="#modal-edit"
+                                                        th:attrappend="data-product-id=${product.id}">
+                                                    <i class="fas fa-edit"></i>
                                                 </button>
                                                 <button type="button" id="btnDelete"
-                                                        class="btn btn-block btn-danger btn-sm"><i
+                                                        class="btn btn-block btn-danger btn-sm"
+                                                        data-toggle="modal" data-target="#modal-delete"
+                                                        th:attrappend="data-product-id=${product.id}"><i
                                                         class="fas fa-trash"></i>
                                                 </button>
                                             </div>
@@ -126,6 +151,254 @@
                 <!-- /.col-md-6 -->
             </div>
             <!-- /.row -->
+            <div class="modal fade" id="modal-add">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Product</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="addForm" th:action="@{/products/add}" th:object="${product}" method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputname">Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{name}" class="form-control"
+                                               id="a-inputname" name="fullname"
+                                               placeholder="Enter Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputunit">Unit</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control select2" id="a-inputunit"
+                                                name="unit" style="width: 100%;">
+                                            <option value="" disabled selected>Select Unit</option>
+                                            <option th:each="unit : ${T(com.moulik.businessassistant.model.Unit).values()}"
+                                                    th:value="${unit.name()}"
+                                                    th:text="${unit.name()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-bnname">Bangla Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{bnName}" class="form-control" id="a-bnname"
+                                               name="bnname"
+                                               placeholder="Enter Bangla Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputsku">SKU</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{sku}" class="form-control"
+                                               id="a-inputsku"
+                                               name="sku"
+                                               placeholder="Enter SKU">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-purchaseprice">Purchase Price</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{purchasePrice}" class="form-control"
+                                               id="a-purchaseprice"
+                                               name="purchaseprice"
+                                               placeholder="Enter Purchase Price">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-saleprice">Sale Price</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{salePrice}" class="form-control"
+                                               id="a-saleprice"
+                                               name="saleprice"
+                                               placeholder="Enter Sale Price">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-percentage">Percentage</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{percentage}" class="form-control"
+                                               id="a-percentage"
+                                               name="percentage"
+                                               placeholder="Enter Percentage">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="btnAdd" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal-edit">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Product</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="editForm" th:object="${product}">
+                            <div class="modal-body">
+                                <input type="hidden" id="inputid1"/>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputname">First Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{name}" class="form-control"
+                                               id="e-inputname" name="name"
+                                               placeholder="Enter Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputunit">Unit</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{unit}" class="form-control" id="e-inputunit"
+                                               name="unit"
+                                               placeholder="Enter Unit">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputbnname">Bangla Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{bnName}" class="form-control" id="e-inputbnname"
+                                               name="bnname"
+                                               placeholder="Enter Bangla Name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputsku">SKU</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{sku}" class="form-control"
+                                               id="e-inputsku"
+                                               name="sku"
+                                               placeholder="Enter SKU">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputpurchaseprice">Purchase Price</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{purchasePrice}" class="form-control"
+                                               id="e-inputpurchaseprice"
+                                               name="purchaseprice"
+                                               placeholder="Enter Purchase Price">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputsaleprice">Sale Price</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{salePrice}" class="form-control"
+                                               id="e-inputsaleprice"
+                                               name="saleprice"
+                                               placeholder="Enter Sale Price">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputpercentage">Percentage</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{percentage}" class="form-control"
+                                               id="e-inputpercentage"
+                                               name="percentage"
+                                               placeholder="Enter Percentage">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="confirmEdit" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal-view">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">View Product</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="viewForm">
+                            <div class="modal-body">
+                                <input type="hidden" id="v-inputid"/>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputname">Name</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputname"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputunit">Unit</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputunit"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputbnname">Bangla Name</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputbnname"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputsku">SKU</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputsku"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputpurchaseprice">Purchase Price</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputpurchaseprice"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputsaleprice">Sale Price</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputsaleprice"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputpercentage">Percentage</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputpercentage"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modal-delete">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Delete Product</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Delete this product?</p>
+                            <input type="hidden" id="productId"/>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button id="confirmDelete" type="submit" class="btn btn-primary">Yes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </section><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -138,6 +411,13 @@
 <!-- REQUIRED SCRIPTS -->
 
 <th:block layout:fragment="script">
+    <!-- jquery-validation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+            integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
+            integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- DataTables  & Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
             integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
@@ -154,40 +434,285 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/dataTables.buttons.min.js"
             integrity="sha512-dDM0yJk5qN8gaaUywkA8C9CSv9l3C0cf+2qSgKzbLMMi//6RFgd+mcDT9rYdtAtK6H0NH48lS4jbJA1sLnUBHw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.js"
             integrity="sha512-D4MloW0hy9XtYnqtvwfg2T2WZRn0dB8Ir0KcPrDX7S/gVE05JotZQHirzd9vMSIT8ViKyntOOZl1muHii0spUA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/jszip/jszip.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"
             integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"
             integrity="sha512-Yf733gmgLgGUo+VfWq4r5HAEaxftvuTes86bKvwTpqOY3oH0hHKtX/9FfKYUcpaxeBJxeXvcN4EY3J6fnmc9cA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/vfs_fonts.js"
             integrity="sha512-cktKDgjEiIkPVHYbn8bh/FEyYxmt4JDJJjOCu5/FQAkW4bc911XtKYValiyzBiJigjVEvrIAyQFEbRJZyDA1wQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.html5.min.js"
             integrity="sha512-ZUGQhhVpnt2+pGfdtbxpt4BBUic1COXkzPUNW/fRAB2lHS+GqxsuVBDVdtwSS0HVnjoRsmo4xAl1aRjHsFTirw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.print.min.js"
             integrity="sha512-VpZVjReV4WlkVWNMq5Bdhg3SmA9DwzA/NyNlzqguI/hAni9s3++rgHEr7XZHXEJl/Y4IZWTVNWy/7Jy9uQPLMA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.colVis.min.js"
             integrity="sha512-ll1/he+7pNOn7mpHZxOpCdV6HB+BNYs9rcDeHZSTV33/JHJIET2HCSjbCXREbl0LteZVQpg+zgpAlIABGXL/ow=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+            integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(function () {
-            $("#example1").DataTable({
+            $("#productTable").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#productTable_wrapper .col-md-6:eq(0)');
+        });
+
+        $(document).on("click", "#btnView", function () {
+            var productId = $(this).data('product-id');
+
+            $.ajax({
+                type: 'GET',
+                url: "/products/" + productId,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $('#v-inputid').val(data.id);
+                    $("#v-inputname").text(data.name);
+                    $('#v-inputunit').text(data.unit);
+                    $('#v-inputbnname').text(data.bnName);
+                    $('#v-inputsku').text(data.sku);
+                    $('#v-inputpurchaseprice').text(data.purchasePrice);
+                    $('#v-inputsaleprice').text(data.salePrice);
+                    $('#v-inputpercentage').text(data.percentage);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        $('#addForm').validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                unit: {
+                    required: true
+                },
+                bnName: {
+                    required: true
+                },
+                sku: {
+                    required: true
+                },
+                purchasePrice: {
+                    required: true
+                },
+                salePrice: {
+                    required: true
+                },
+                percentage: {
+                    required: true
+                }
+            },
+            messages: {
+                name: {
+                    required: "Please enter a name"
+                },
+                unit: {
+                    required: "Please enter unit",
+                },
+                bnName: {
+                    required: "Please enter a bangla name"
+                },
+                sku: {
+                    required: "Please enter a sku"
+                },
+                purchasePrice: {
+                    required: "Please enter a purchase price"
+                },
+                salePrice: {
+                    required: "Please enter a sale price"
+                },
+                percentage: {
+                    required: "Please enter a percentage"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url: form.action,
+                    type: form.method,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        $('#modal-add').modal('hide');
+                        toastr.success(data);
+                        setTimeout(function () {
+                            location.reload();  //Refresh page
+                        }, 3000);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            }
+        });
+
+        $(document).on("click", "#btnEdit", function () {
+            var productId = $(this).data('product-id');
+
+            $.ajax({
+                type: 'GET',
+                url: "/products/" + productId,
+                dataType: "json",
+                success: function (data) {
+                    $('#inputid1').val(data.id);
+                    $('#e-inputname').val(data.name);
+                    $('#e-inputunit').val(data.unit);
+                    $('#e-inputbnname').val(data.bnName);
+                    $('#e-inputsku').val(data.sku);
+                    $('#e-inputpurchaseprice').val(data.purchasePrice);
+                    $('#e-inputsaleprice').val(data.salePrice);
+                    $('#e-inputpercentage').val(data.percentage);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        });
+
+        $('#editForm').validate({
+            rules: {
+                name: {
+                    required: true
+                },
+                unit: {
+                    required: true
+                },
+                bnname: {
+                    required: true
+                },
+                sku: {
+                    required: true
+                },
+                purchaseprice: {
+                    required: true
+                },
+                saleprice: {
+                    required: true
+                },
+                percentage: {
+                    required: true
+                }
+            },
+            messages: {
+                name: {
+                    required: "Please enter a name"
+                },
+                unit: {
+                    required: "Please enter unit",
+                },
+                bnname: {
+                    required: "Please enter a bangla name"
+                },
+                sku: {
+                    required: "Please enter a sku"
+                },
+                purchaseprice: {
+                    required: "Please enter a purchase price"
+                },
+                saleprice: {
+                    required: "Please enter a sale price"
+                },
+                percentage: {
+                    required: "Please enter a percentage"
+                }
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            },
+            submitHandler: function (form) {
+                var productId = document.getElementById("inputid1").value;
+
+                $('#inputid1').val(data.id);
+                $('#e-inputname').val(data.name);
+                $('#e-inputunit').val(data.unit);
+                $('#e-inputbnname').val(data.bnName);
+                $('#e-inputsku').val(data.sku);
+                $('#e-inputpurchaseprice').val(data.purchasePrice);
+                $('#e-inputsaleprice').val(data.salePrice);
+                $('#e-inputpercentage').val(data.percentage);
+
+                var formData = {
+                    name: $("#e-inputname").val(),
+                    unit: $("#e-inputunit").val(),
+                    bnname: $("#e-inputbnname").val(),
+                    sku: $("#e-inputsku").val(),
+                    purchaseprice: $("#e-inputpurchaseprice").val(),
+                    saleprice: $("#e-inputsaleprice").val(),
+                    percentage: $("#e-inputpercentage").val()
+                };
+
+                console.log(formData);
+
+                // $.ajax({
+                //     type: "PUT",
+                //     url: "/products/edit/" + productId,
+                //     data: JSON.stringify(formData),
+                //     contentType: 'application/json',
+                //     success: function (data) {
+                //         $('#modal-edit').modal('hide');
+                //         toastr.success(data);
+                //         setTimeout(function () {
+                //             location.reload();  //Refresh page
+                //         }, 3000); //3 Second
+                //     },
+                //     error: function (err) {
+                //         console.log(err);
+                //     }
+                // });
+            }
+        });
+
+        $(document).on("click", "#btnDelete", function () {
+            var productId = $(this).data('product-id');
+            $('#productId').val(productId);
+        });
+
+        $(document).on("click", "#confirmDelete", function () {
+            var productId = document.getElementById("productId").value;
+
+            $.ajax({
+                type: "DELETE",
+                url: "/products/delete/" + productId,
+                success: function (data) {
+                    console.log(data);
+                    $('#modal-delete').modal('hide');
+                    $('table#productTable tr#' + productId).remove();
+                    toastr.success(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
         });
     </script>
 </th:block>

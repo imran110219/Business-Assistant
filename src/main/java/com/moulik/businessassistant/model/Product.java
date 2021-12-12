@@ -20,13 +20,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "unit")
-    @Enumerated(EnumType.STRING)
-    private Unit unit;
-
     @Basic
     @Column(name = "name")
     private String name;
+
+    @Column(name = "unit")
+    @Enumerated(EnumType.STRING)
+    private Unit unit;
 
     @Basic
     @Column(name = "bn_name")
