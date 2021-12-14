@@ -166,7 +166,7 @@
                                     <label class="col-sm-3 col-form-label" for="a-inputname">Name</label>
                                     <div class="col-sm-9">
                                         <input type="text" th:field="*{name}" class="form-control"
-                                               id="a-inputname" name="fullname"
+                                               id="a-inputname" name="name"
                                                placeholder="Enter Name">
                                     </div>
                                 </div>
@@ -499,16 +499,16 @@
                 unit: {
                     required: true
                 },
-                bnName: {
+                bnname: {
                     required: true
                 },
                 sku: {
                     required: true
                 },
-                purchasePrice: {
+                purchaseprice: {
                     required: true
                 },
-                salePrice: {
+                saleprice: {
                     required: true
                 },
                 percentage: {
@@ -522,16 +522,16 @@
                 unit: {
                     required: "Please enter unit",
                 },
-                bnName: {
+                bnname: {
                     required: "Please enter a bangla name"
                 },
                 sku: {
                     required: "Please enter a sku"
                 },
-                purchasePrice: {
+                purchaseprice: {
                     required: "Please enter a purchase price"
                 },
-                salePrice: {
+                saleprice: {
                     required: "Please enter a sale price"
                 },
                 percentage: {
@@ -652,43 +652,34 @@
             submitHandler: function (form) {
                 var productId = document.getElementById("inputid1").value;
 
-                $('#inputid1').val(data.id);
-                $('#e-inputname').val(data.name);
-                $('#e-inputunit').val(data.unit);
-                $('#e-inputbnname').val(data.bnName);
-                $('#e-inputsku').val(data.sku);
-                $('#e-inputpurchaseprice').val(data.purchasePrice);
-                $('#e-inputsaleprice').val(data.salePrice);
-                $('#e-inputpercentage').val(data.percentage);
-
                 var formData = {
                     name: $("#e-inputname").val(),
                     unit: $("#e-inputunit").val(),
-                    bnname: $("#e-inputbnname").val(),
+                    bnName: $("#e-inputbnname").val(),
                     sku: $("#e-inputsku").val(),
-                    purchaseprice: $("#e-inputpurchaseprice").val(),
-                    saleprice: $("#e-inputsaleprice").val(),
+                    purchasePrice: $("#e-inputpurchaseprice").val(),
+                    salePrice: $("#e-inputsaleprice").val(),
                     percentage: $("#e-inputpercentage").val()
                 };
 
                 console.log(formData);
 
-                // $.ajax({
-                //     type: "PUT",
-                //     url: "/products/edit/" + productId,
-                //     data: JSON.stringify(formData),
-                //     contentType: 'application/json',
-                //     success: function (data) {
-                //         $('#modal-edit').modal('hide');
-                //         toastr.success(data);
-                //         setTimeout(function () {
-                //             location.reload();  //Refresh page
-                //         }, 3000); //3 Second
-                //     },
-                //     error: function (err) {
-                //         console.log(err);
-                //     }
-                // });
+                $.ajax({
+                    type: "PUT",
+                    url: "/products/edit/" + productId,
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $('#modal-edit').modal('hide');
+                        toastr.success(data);
+                        setTimeout(function () {
+                            location.reload();  //Refresh page
+                        }, 3000); //3 Second
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
             }
         });
 
