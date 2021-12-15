@@ -259,9 +259,21 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label" for="e-inputunit">Unit</label>
                                     <div class="col-sm-9">
-                                        <input type="text" th:field="*{unit}" class="form-control" id="e-inputunit"
-                                               name="unit"
-                                               placeholder="Enter Unit">
+                                        <select class="form-control select2" id="e-inputunit" th:field="*{unit}"
+                                                name="unit" style="width: 100%;">
+                                            <option th:each="unit : ${T(com.moulik.businessassistant.model.Unit).values()}"
+                                                    th:value="${unit.name()}"
+                                                    th:text="${unit.name()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="e-inputtypes">Type</label>
+                                    <div class="col-sm-9">
+                                        <select multiple class="form-control" id="e-inputtypes" th:field="*{types}" name="types">
+                                            <option th:each="type : ${types}" th:value="${type.id}"
+                                                    th:text="${type.name}"></option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -282,7 +294,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="e-inputpurchaseprice">Purchase Price</label>
+                                    <label class="col-sm-3 col-form-label" for="e-inputpurchaseprice">Purchase
+                                        Price</label>
                                     <div class="col-sm-9">
                                         <input type="text" th:field="*{purchasePrice}" class="form-control"
                                                id="e-inputpurchaseprice"
@@ -355,7 +368,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="v-inputpurchaseprice">Purchase Price</label>
+                                    <label class="col-sm-3 col-form-label" for="v-inputpurchaseprice">Purchase
+                                        Price</label>
                                     <div class="col-sm-9">
                                         <p id="v-inputpurchaseprice"></p>
                                     </div>
@@ -398,7 +412,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </section><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -579,6 +593,7 @@
                     $('#inputid1').val(data.id);
                     $('#e-inputname').val(data.name);
                     $('#e-inputunit').val(data.unit);
+                    $('#e-inputtypes').val(data.types);
                     $('#e-inputbnname').val(data.bnName);
                     $('#e-inputsku').val(data.sku);
                     $('#e-inputpurchaseprice').val(data.purchasePrice);
@@ -656,6 +671,7 @@
                     name: $("#e-inputname").val(),
                     unit: $("#e-inputunit").val(),
                     bnName: $("#e-inputbnname").val(),
+                    // types: $("#e-inputtypes").val(),
                     sku: $("#e-inputsku").val(),
                     purchasePrice: $("#e-inputpurchaseprice").val(),
                     salePrice: $("#e-inputsaleprice").val(),

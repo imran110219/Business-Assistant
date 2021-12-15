@@ -2,11 +2,10 @@ package com.moulik.businessassistant.controller;
 
 import com.moulik.businessassistant.exception.RecordNotFoundException;
 import com.moulik.businessassistant.iservice.ProductService;
+import com.moulik.businessassistant.iservice.TypeService;
 import com.moulik.businessassistant.iservice.UserService;
+import com.moulik.businessassistant.model.*;
 import com.moulik.businessassistant.model.Product;
-import com.moulik.businessassistant.model.Product;
-import com.moulik.businessassistant.model.Unit;
-import com.moulik.businessassistant.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +20,15 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final TypeService typeService;
 
     @GetMapping("/products")
     public String getProduct(Model model) {
         List<Product> list = productService.getAllProducts();
+        List<Type> typeList = typeService.getAllTypes();
         model.addAttribute("product", new Product());
         model.addAttribute("products", list);
+        model.addAttribute("types", typeList);
         return "product";
     }
 
