@@ -183,6 +183,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputtypes">Type</label>
+                                    <div class="col-sm-9">
+                                        <select multiple class="form-control" id="a-inputtypes" th:field="*{types}" name="types">
+                                            <option value="" disabled selected>Select Type</option>
+                                            <option th:each="type : ${typelist}" th:value="${type.id}"
+                                                    th:text="${type.name}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-3 col-form-label" for="a-bnname">Bangla Name</label>
                                     <div class="col-sm-9">
                                         <input type="text" th:field="*{bnName}" class="form-control" id="a-bnname"
@@ -270,9 +280,11 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label" for="e-inputtypes">Type</label>
                                     <div class="col-sm-9">
-                                        <select multiple class="form-control" id="e-inputtypes" th:field="*{types}" name="types">
-                                            <option th:each="type : ${types}" th:value="${type.id}"
-                                                    th:text="${type.name}"></option>
+                                        <select multiple class="form-control" th:field="*{types}" id="e-inputtypes" name="types">
+                                            <option th:each="type : ${typelist}"
+                                                    th:value="${type.id}"
+                                                    th:text="${type.name}">
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -353,6 +365,12 @@
                                     <label class="col-sm-3 col-form-label" for="v-inputunit">Unit</label>
                                     <div class="col-sm-9">
                                         <p id="v-inputunit"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="v-inputtypes">Type</label>
+                                    <div class="col-sm-9">
+                                        <p id="v-inputtypes"></p>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -493,6 +511,12 @@
                     $('#v-inputid').val(data.id);
                     $("#v-inputname").text(data.name);
                     $('#v-inputunit').text(data.unit);
+                    var s = "";
+                    for(var i = 0; i < data.types.length-1; i += 1) {
+                        s += data.types[i].name + ", ";
+                    }
+                    s += data.types[data.types.length-1].name;
+                    $('#v-inputtypes').text(s);
                     $('#v-inputbnname').text(data.bnName);
                     $('#v-inputsku').text(data.sku);
                     $('#v-inputpurchaseprice').text(data.purchasePrice);
@@ -511,6 +535,9 @@
                     required: true
                 },
                 unit: {
+                    required: true
+                },
+                types: {
                     required: true
                 },
                 bnname: {
@@ -535,6 +562,9 @@
                 },
                 unit: {
                     required: "Please enter unit",
+                },
+                types: {
+                    required: "Please select type",
                 },
                 bnname: {
                     required: "Please enter a bangla name"
@@ -590,6 +620,7 @@
                 url: "/products/" + productId,
                 dataType: "json",
                 success: function (data) {
+                    console.log(data);
                     $('#inputid1').val(data.id);
                     $('#e-inputname').val(data.name);
                     $('#e-inputunit').val(data.unit);
@@ -614,6 +645,9 @@
                 unit: {
                     required: true
                 },
+                types: {
+                    required: true
+                },
                 bnname: {
                     required: true
                 },
@@ -636,6 +670,9 @@
                 },
                 unit: {
                     required: "Please enter unit",
+                },
+                types: {
+                    required: "Please select type",
                 },
                 bnname: {
                     required: "Please enter a bangla name"
@@ -671,7 +708,7 @@
                     name: $("#e-inputname").val(),
                     unit: $("#e-inputunit").val(),
                     bnName: $("#e-inputbnname").val(),
-                    // types: $("#e-inputtypes").val(),
+                    types: $("#e-inputtypes").val(),
                     sku: $("#e-inputsku").val(),
                     purchasePrice: $("#e-inputpurchaseprice").val(),
                     salePrice: $("#e-inputsaleprice").val(),

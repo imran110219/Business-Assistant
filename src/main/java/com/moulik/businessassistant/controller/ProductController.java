@@ -28,7 +28,7 @@ public class ProductController {
         List<Type> typeList = typeService.getAllTypes();
         model.addAttribute("product", new Product());
         model.addAttribute("products", list);
-        model.addAttribute("types", typeList);
+        model.addAttribute("typelist", typeList);
         return "product";
     }
 
@@ -48,7 +48,7 @@ public class ProductController {
     @PutMapping("/products/edit/{id}")
     public ResponseEntity<String> editProductById(@RequestBody Product newProduct, @PathVariable(value = "id") Long productId) {
         productService.updateProduct(newProduct, productId);
-        return new ResponseEntity<>("Product is Edited Successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Product is edited successfully", HttpStatus.OK);
     }
 
     @DeleteMapping("/products/delete/{id}")

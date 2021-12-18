@@ -11,8 +11,9 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Entity
 @Table(name = "types")
 public class Type {
@@ -27,4 +28,7 @@ public class Type {
     @Basic
     @Column(name = "description")
     private String description;
+
+    public Type() {
+    }
 }
