@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RequiredArgsConstructor
 @Controller
@@ -26,9 +28,11 @@ public class ProductController {
     public String getProduct(Model model) {
         List<Product> list = productService.getAllProducts();
         List<Type> typeList = typeService.getAllTypes();
+        Set<Type> typeSet = new HashSet<>(typeList);
         model.addAttribute("product", new Product());
         model.addAttribute("products", list);
         model.addAttribute("typelist", typeList);
+        model.addAttribute("typeset", typeSet);
         return "product";
     }
 

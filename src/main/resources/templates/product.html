@@ -280,8 +280,9 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label" for="e-inputtypes">Type</label>
                                     <div class="col-sm-9">
-                                        <select multiple class="form-control" th:field="*{types}" id="e-inputtypes" name="types">
-                                            <option th:each="type : ${typelist}"
+                                        <select multiple class="form-control" id="e-inputtypes" name="types">
+                                            <option th:each="type : ${typeset}"
+                                                    th:selected="${product.types.contains(type)}"
                                                     th:value="${type.id}"
                                                     th:text="${type.name}">
                                             </option>
