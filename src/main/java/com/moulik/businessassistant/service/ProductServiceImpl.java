@@ -1,13 +1,19 @@
 package com.moulik.businessassistant.service;
 
+import com.moulik.businessassistant.dto.ProductDTO;
 import com.moulik.businessassistant.exception.RecordNotFoundException;
 import com.moulik.businessassistant.iservice.ProductService;
 import com.moulik.businessassistant.model.Product;
+import com.moulik.businessassistant.model.Type;
+import com.moulik.businessassistant.model.User;
 import com.moulik.businessassistant.repository.ProductRepository;
+import com.moulik.businessassistant.repository.TypeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Sadman
@@ -16,6 +22,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final TypeRepository typeRepository;
 
     @Override
     public List<Product> getAllProducts() {

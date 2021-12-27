@@ -22,6 +22,18 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.css"
               integrity="sha512-0LpZpPhy5gC20rXCT9HfsYz0gF+wRD62I/MCY+d1tDgK7xKpvd0hQLMBqyXS9BYdzyis/BdIW2iMIBK8e+0o+Q=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <!-- Toastr -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"
+              integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <!-- Select2 -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+              integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css"
+              integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
     </th:block>
 </head>
 
@@ -46,21 +58,25 @@
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
 
-        <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-
                         <div class="card">
-                            <!-- <div class="card-header">
-                              <h3 class="card-title">DataTable with default features</h3>
-                            </div> -->
-                            <!-- /.card-header -->
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-1">
+                                        <button type="button" class="btn btn-block btn-success btn-sm"
+                                                data-toggle="modal" data-target="#modal-add">Add
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-22 col-md-11">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card-body">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="bankStatementTable" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
                                         <th>User</th>
@@ -72,9 +88,11 @@
                                     </thead>
                                     <tbody>
                                     <tr th:id="${bankStatement.id}" th:each="bankStatement : ${bankStatements}">
-                                        <td th:id="'user'+${bankStatement.id}" th:text="${bankStatement.user.userName}"></td>
+                                        <td th:id="'user'+${bankStatement.id}"
+                                            th:text="${bankStatement.user.userName}"></td>
                                         <td th:id="'amount'+${bankStatement.id}" th:text="${bankStatement.amount}"></td>
-                                        <td th:id="'transacion'+${bankStatement.id}" th:text="${bankStatement.transactionType}"></td>
+                                        <td th:id="'transacion'+${bankStatement.id}"
+                                            th:text="${bankStatement.transactionType}"></td>
                                         <td th:id="'date'+${bankStatement.id}" th:text="${bankStatement.datetime}"></td>
                                         <td>
                                             <div class="btn-group">
@@ -82,15 +100,21 @@
                                                 <button type="button" id="btnView"
                                                         class="btn btn-block btn-info btn-sm"
                                                         style="margin-top: 8px;border-radius: 3px 0 0 3px;"
-                                                ><i class="fas fa-eye"></i>
+                                                        data-toggle="modal" data-target="#modal-view"
+                                                        th:attrappend="data-bankstatement-id=${bankStatement.id}">
+                                                    <i class="fas fa-eye"></i>
                                                 </button>
                                                 <button type="button" id="btnEdit"
                                                         class="btn btn-block btn-primary btn-sm"
-                                                        style="margin-top: 8px"><i
-                                                        class="fas fa-edit"></i>
+                                                        style="margin-top: 8px"
+                                                        data-toggle="modal" data-target="#modal-edit"
+                                                        th:attrappend="data-bankstatement-id=${bankStatement.id}">
+                                                    <i class="fas fa-edit"></i>
                                                 </button>
                                                 <button type="button" id="btnDelete"
-                                                        class="btn btn-block btn-danger btn-sm"><i
+                                                        class="btn btn-block btn-danger btn-sm"
+                                                        data-toggle="modal" data-target="#modal-delete"
+                                                        th:attrappend="data-bankstatement-id=${bankStatement.id}"><i
                                                         class="fas fa-trash"></i>
                                                 </button>
                                             </div>
@@ -113,10 +137,266 @@
                         <!-- /.card -->
                     </div>
                 </div>
-
                 <!-- /.col-md-6 -->
             </div>
             <!-- /.row -->
+            <div class="modal fade" id="modal-add">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Bank Transaction</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="addForm" th:action="@{/bankstatements/add}" th:object="${bankStatement}"
+                              method="post">
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-inputuser">User</label>
+                                    <div class="col-sm-9">
+                                        <select lass="form-control" id="a-inputuser" th:field="*{user}"
+                                                name="user">
+                                            <option th:each="user : ${users}" th:value="${user.id}"
+                                                    th:text="${user.userName}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-amount">Amount</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" th:field="*{amount}" class="form-control"
+                                               id="a-amount"
+                                               name="amount"
+                                               placeholder="Enter Amount">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-transactiontype">Transaction
+                                        Type</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control select2" id="a-transactiontype"
+                                                name="transactiontype" style="width: 100%;">
+                                            <option value="" disabled selected>Select Transaction Type</option>
+                                            <option th:each="transactionType : ${T(com.moulik.businessassistant.model.TransactionType).values()}"
+                                                    th:value="${transactionType.name()}"
+                                                    th:text="${transactionType.name()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label" for="a-date">Date</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group date" id="a-date"
+                                             data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input"
+                                                   id="date"
+                                                   th:field="*{datetime}"
+                                                   data-target="#a-date"/>
+                                            <div class="input-group-append" data-target="#a-date"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="btnAdd" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--            <div class="modal fade" id="modal-edit">-->
+            <!--                <div class="modal-dialog">-->
+            <!--                    <div class="modal-content">-->
+            <!--                        <div class="modal-header">-->
+            <!--                            <h4 class="modal-title">Edit Product</h4>-->
+            <!--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+            <!--                                <span aria-hidden="true">&times;</span>-->
+            <!--                            </button>-->
+            <!--                        </div>-->
+            <!--                        <form id="editForm" th:object="${productdto}">-->
+            <!--                            <div class="modal-body">-->
+            <!--                                <input type="hidden" id="inputid1"/>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputname">First Name</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <input type="text" th:field="*{name}" class="form-control"-->
+            <!--                                               id="e-inputname" name="name"-->
+            <!--                                               placeholder="Enter Name">-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputunit">Unit</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <select class="form-control select2" id="e-inputunit" th:field="*{unit}"-->
+            <!--                                                name="unit" style="width: 100%;">-->
+            <!--                                            <option th:each="unit : ${T(com.moulik.businessassistant.model.Unit).values()}"-->
+            <!--                                                    th:value="${unit.name()}"-->
+            <!--                                                    th:text="${unit.name()}"></option>-->
+            <!--                                        </select>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputtypes">Type</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <select class="form-control select2" id="e-inputtypes" th:field="*{productTypeIds}" name="types" multiple="multiple" style="width: 100%;">-->
+            <!--                                            <option th:each="type : ${typelist}"-->
+            <!--                                                    th:value="${type.id}"-->
+            <!--                                                    th:text="${type.name}">-->
+            <!--                                            </option>-->
+            <!--                                        </select>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputbnname">Bangla Name</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <input type="text" th:field="*{bnName}" class="form-control" id="e-inputbnname"-->
+            <!--                                               name="bnname"-->
+            <!--                                               placeholder="Enter Bangla Name">-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputsku">SKU</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <input type="text" th:field="*{sku}" class="form-control"-->
+            <!--                                               id="e-inputsku"-->
+            <!--                                               name="sku"-->
+            <!--                                               placeholder="Enter SKU">-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputpurchaseprice">Purchase-->
+            <!--                                        Price</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <input type="text" th:field="*{purchasePrice}" class="form-control"-->
+            <!--                                               id="e-inputpurchaseprice"-->
+            <!--                                               name="purchaseprice"-->
+            <!--                                               placeholder="Enter Purchase Price">-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputsaleprice">Sale Price</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <input type="text" th:field="*{salePrice}" class="form-control"-->
+            <!--                                               id="e-inputsaleprice"-->
+            <!--                                               name="saleprice"-->
+            <!--                                               placeholder="Enter Sale Price">-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputpercentage">Percentage</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <input type="text" th:field="*{percentage}" class="form-control"-->
+            <!--                                               id="e-inputpercentage"-->
+            <!--                                               name="percentage"-->
+            <!--                                               placeholder="Enter Percentage">-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                            <div class="modal-footer justify-content-between">-->
+            <!--                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+            <!--                                <button id="confirmEdit" type="submit" class="btn btn-primary">Save</button>-->
+            <!--                            </div>-->
+            <!--                        </form>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <!--            <div class="modal fade" id="modal-view">-->
+            <!--                <div class="modal-dialog">-->
+            <!--                    <div class="modal-content">-->
+            <!--                        <div class="modal-header">-->
+            <!--                            <h4 class="modal-title">View Product</h4>-->
+            <!--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+            <!--                                <span aria-hidden="true">&times;</span>-->
+            <!--                            </button>-->
+            <!--                        </div>-->
+            <!--                        <form id="viewForm">-->
+            <!--                            <div class="modal-body">-->
+            <!--                                <input type="hidden" id="v-inputid"/>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="v-inputname">Name</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <p id="v-inputname"></p>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="v-inputunit">Unit</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <p id="v-inputunit"></p>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="v-inputtypes">Type</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <p id="v-inputtypes"></p>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="v-inputbnname">Bangla Name</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <p id="v-inputbnname"></p>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="v-inputsku">SKU</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <p id="v-inputsku"></p>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="v-inputpurchaseprice">Purchase-->
+            <!--                                        Price</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <p id="v-inputpurchaseprice"></p>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="v-inputsaleprice">Sale Price</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <p id="v-inputsaleprice"></p>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                                <div class="form-group row">-->
+            <!--                                    <label class="col-sm-3 col-form-label" for="v-inputpercentage">Percentage</label>-->
+            <!--                                    <div class="col-sm-9">-->
+            <!--                                        <p id="v-inputpercentage"></p>-->
+            <!--                                    </div>-->
+            <!--                                </div>-->
+            <!--                            </div>-->
+            <!--                        </form>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <!--            <div class="modal fade" id="modal-delete">-->
+            <!--                <div class="modal-dialog modal-sm">-->
+            <!--                    <div class="modal-content">-->
+            <!--                        <div class="modal-header">-->
+            <!--                            <h4 class="modal-title">Delete Product</h4>-->
+            <!--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+            <!--                                <span aria-hidden="true">&times;</span>-->
+            <!--                            </button>-->
+            <!--                        </div>-->
+            <!--                        <div class="modal-body">-->
+            <!--                            <p>Delete this product?</p>-->
+            <!--                            <input type="hidden" id="productId"/>-->
+            <!--                        </div>-->
+            <!--                        <div class="modal-footer justify-content-between">-->
+            <!--                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+            <!--                            <button id="confirmDelete" type="submit" class="btn btn-primary">Yes</button>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
         </section><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -144,40 +424,106 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/dataTables.buttons.min.js"
             integrity="sha512-dDM0yJk5qN8gaaUywkA8C9CSv9l3C0cf+2qSgKzbLMMi//6RFgd+mcDT9rYdtAtK6H0NH48lS4jbJA1sLnUBHw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables.net-buttons-bs4/1.7.1/buttons.bootstrap4.min.js"
             integrity="sha512-D4MloW0hy9XtYnqtvwfg2T2WZRn0dB8Ir0KcPrDX7S/gVE05JotZQHirzd9vMSIT8ViKyntOOZl1muHii0spUA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/jszip/jszip.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"
             integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"
             integrity="sha512-Yf733gmgLgGUo+VfWq4r5HAEaxftvuTes86bKvwTpqOY3oH0hHKtX/9FfKYUcpaxeBJxeXvcN4EY3J6fnmc9cA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/vfs_fonts.js"
             integrity="sha512-cktKDgjEiIkPVHYbn8bh/FEyYxmt4JDJJjOCu5/FQAkW4bc911XtKYValiyzBiJigjVEvrIAyQFEbRJZyDA1wQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.html5.min.js"
             integrity="sha512-ZUGQhhVpnt2+pGfdtbxpt4BBUic1COXkzPUNW/fRAB2lHS+GqxsuVBDVdtwSS0HVnjoRsmo4xAl1aRjHsFTirw=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.print.min.js"
             integrity="sha512-VpZVjReV4WlkVWNMq5Bdhg3SmA9DwzA/NyNlzqguI/hAni9s3++rgHEr7XZHXEJl/Y4IZWTVNWy/7Jy9uQPLMA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/1.7.1/js/buttons.colVis.min.js"
             integrity="sha512-ll1/he+7pNOn7mpHZxOpCdV6HB+BNYs9rcDeHZSTV33/JHJIET2HCSjbCXREbl0LteZVQpg+zgpAlIABGXL/ow=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+            integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"
+            integrity="sha512-RtZU3AyMVArmHLiW0suEZ9McadTdegwbgtiQl5Qqo9kunkVg1ofwueXD8/8wv3Af8jkME3DDe3yLfR8HSJfT2g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- InputMask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
+            integrity="sha512-6Jym48dWwVjfmvB0Hu3/4jn4TODd6uvkxdi9GNbBHwZ4nGcRxJUCaTkL3pVY6XUQABqFo3T58EMXFQztbjvAFQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(function () {
-            $("#example1").DataTable({
+            $("#bankStatementTable").DataTable({
                 "responsive": true, "lengthChange": false, "autoWidth": false,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#bankStatementTable_wrapper .col-md-6:eq(0)');
+
+            //Date picker
+            $('#a-date').datetimepicker({
+                format: 'L'
+            });
+
+            $('#addForm').validate({
+                rules: {
+                    user: {
+                        required: true
+                    },
+                    amount: {
+                        required: true
+                    },
+                    transactiontype: {
+                        required: true
+                    }
+                },
+                messages: {
+                    user: {
+                        required: "Please enter a name"
+                    },
+                    amount: {
+                        required: "Please enter unit",
+                    },
+                    transactiontype: {
+                        required: "Please select type",
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                },
+                submitHandler: function (form) {
+                    $.ajax({
+                        url: form.action,
+                        type: form.method,
+                        data: $(form).serialize(),
+                        success: function (data) {
+                            $('#modal-add').modal('hide');
+                            toastr.success(data);
+                            setTimeout(function () {
+                                location.reload();  //Refresh page
+                            }, 3000);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            });
         });
     </script>
 </th:block>
