@@ -34,6 +34,11 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css"
               integrity="sha512-kq3FES+RuuGoBW3a9R2ELYKRywUEQv0wvPTItv3DSGqjpbNtGWVdvT8qwdKkqvPzT93jp8tSF4+oN4IeTEIlQA=="
               crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css"
+              integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
     </th:block>
 </head>
 
@@ -155,7 +160,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label" for="a-inputuser">User</label>
                                     <div class="col-sm-9">
-                                        <select lass="form-control" id="a-inputuser" th:field="*{user}"
+                                        <select class="form-control" id="a-inputuser" th:field="*{user}"
                                                 name="user">
                                             <option th:each="user : ${users}" th:value="${user.id}"
                                                     th:text="${user.userName}"></option>
@@ -408,6 +413,13 @@
 
 <!-- REQUIRED SCRIPTS -->
 <th:block layout:fragment="script">
+    <!-- jquery-validation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"
+            integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"
+            integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- DataTables  & Plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"
             integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg=="
@@ -459,6 +471,10 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"
             integrity="sha512-6Jym48dWwVjfmvB0Hu3/4jn4TODd6uvkxdi9GNbBHwZ4nGcRxJUCaTkL3pVY6XUQABqFo3T58EMXFQztbjvAFQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"
+            integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(function () {
