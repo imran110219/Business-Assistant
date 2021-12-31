@@ -158,31 +158,33 @@
                               method="post">
                             <div class="modal-body">
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="a-inputuser">User</label>
-                                    <div class="col-sm-9">
+                                    <label class="col-sm-4 col-form-label" for="a-inputuser">User</label>
+                                    <div class="col-sm-8">
                                         <select class="form-control" id="a-inputuser" th:field="*{user}"
                                                 name="user">
+                                            <option value="" disabled selected>Select User</option>
                                             <option th:each="user : ${users}" th:value="${user.id}"
                                                     th:text="${user.userName}"></option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="a-amount">Amount</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" th:field="*{amount}" class="form-control"
+                                    <label class="col-sm-4 col-form-label" for="a-amount">Amount</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" th:field="*{amount}" class="form-control"
                                                id="a-amount"
                                                name="amount"
                                                placeholder="Enter Amount">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="a-transactiontype">Transaction
+                                    <label class="col-sm-4 col-form-label" for="a-transactiontype">Transaction
                                         Type</label>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-8">
                                         <select class="form-control select2" id="a-transactiontype"
+                                                th:field="*{transactionType}"
                                                 name="transactiontype" style="width: 100%;">
-                                            <option value="" disabled selected>Select Transaction Type</option>
+                                            <option value="" disabled>Select Transaction Type</option>
                                             <option th:each="transactionType : ${T(com.moulik.businessassistant.model.TransactionType).values()}"
                                                     th:value="${transactionType.name()}"
                                                     th:text="${transactionType.name()}"></option>
@@ -190,8 +192,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label" for="a-date">Date</label>
-                                    <div class="col-sm-9">
+                                    <label class="col-sm-4 col-form-label" for="a-date">Date</label>
+                                    <div class="col-sm-8">
                                         <div class="input-group date" id="a-date"
                                              data-target-input="nearest">
                                             <input type="text" class="form-control datetimepicker-input"
@@ -217,102 +219,80 @@
                 </div>
             </div>
 
-            <!--            <div class="modal fade" id="modal-edit">-->
-            <!--                <div class="modal-dialog">-->
-            <!--                    <div class="modal-content">-->
-            <!--                        <div class="modal-header">-->
-            <!--                            <h4 class="modal-title">Edit Product</h4>-->
-            <!--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-            <!--                                <span aria-hidden="true">&times;</span>-->
-            <!--                            </button>-->
-            <!--                        </div>-->
-            <!--                        <form id="editForm" th:object="${productdto}">-->
-            <!--                            <div class="modal-body">-->
-            <!--                                <input type="hidden" id="inputid1"/>-->
-            <!--                                <div class="form-group row">-->
-            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputname">First Name</label>-->
-            <!--                                    <div class="col-sm-9">-->
-            <!--                                        <input type="text" th:field="*{name}" class="form-control"-->
-            <!--                                               id="e-inputname" name="name"-->
-            <!--                                               placeholder="Enter Name">-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="form-group row">-->
-            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputunit">Unit</label>-->
-            <!--                                    <div class="col-sm-9">-->
-            <!--                                        <select class="form-control select2" id="e-inputunit" th:field="*{unit}"-->
-            <!--                                                name="unit" style="width: 100%;">-->
-            <!--                                            <option th:each="unit : ${T(com.moulik.businessassistant.model.Unit).values()}"-->
-            <!--                                                    th:value="${unit.name()}"-->
-            <!--                                                    th:text="${unit.name()}"></option>-->
-            <!--                                        </select>-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="form-group row">-->
-            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputtypes">Type</label>-->
-            <!--                                    <div class="col-sm-9">-->
-            <!--                                        <select class="form-control select2" id="e-inputtypes" th:field="*{productTypeIds}" name="types" multiple="multiple" style="width: 100%;">-->
-            <!--                                            <option th:each="type : ${typelist}"-->
-            <!--                                                    th:value="${type.id}"-->
-            <!--                                                    th:text="${type.name}">-->
-            <!--                                            </option>-->
-            <!--                                        </select>-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="form-group row">-->
-            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputbnname">Bangla Name</label>-->
-            <!--                                    <div class="col-sm-9">-->
-            <!--                                        <input type="text" th:field="*{bnName}" class="form-control" id="e-inputbnname"-->
-            <!--                                               name="bnname"-->
-            <!--                                               placeholder="Enter Bangla Name">-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="form-group row">-->
-            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputsku">SKU</label>-->
-            <!--                                    <div class="col-sm-9">-->
-            <!--                                        <input type="text" th:field="*{sku}" class="form-control"-->
-            <!--                                               id="e-inputsku"-->
-            <!--                                               name="sku"-->
-            <!--                                               placeholder="Enter SKU">-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="form-group row">-->
-            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputpurchaseprice">Purchase-->
-            <!--                                        Price</label>-->
-            <!--                                    <div class="col-sm-9">-->
-            <!--                                        <input type="text" th:field="*{purchasePrice}" class="form-control"-->
-            <!--                                               id="e-inputpurchaseprice"-->
-            <!--                                               name="purchaseprice"-->
-            <!--                                               placeholder="Enter Purchase Price">-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="form-group row">-->
-            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputsaleprice">Sale Price</label>-->
-            <!--                                    <div class="col-sm-9">-->
-            <!--                                        <input type="text" th:field="*{salePrice}" class="form-control"-->
-            <!--                                               id="e-inputsaleprice"-->
-            <!--                                               name="saleprice"-->
-            <!--                                               placeholder="Enter Sale Price">-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                                <div class="form-group row">-->
-            <!--                                    <label class="col-sm-3 col-form-label" for="e-inputpercentage">Percentage</label>-->
-            <!--                                    <div class="col-sm-9">-->
-            <!--                                        <input type="text" th:field="*{percentage}" class="form-control"-->
-            <!--                                               id="e-inputpercentage"-->
-            <!--                                               name="percentage"-->
-            <!--                                               placeholder="Enter Percentage">-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                            <div class="modal-footer justify-content-between">-->
-            <!--                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-            <!--                                <button id="confirmEdit" type="submit" class="btn btn-primary">Save</button>-->
-            <!--                            </div>-->
-            <!--                        </form>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
+            <div class="modal fade" id="modal-edit">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Edit Bank Transaction</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form id="editForm" th:object="${bankStatement}">
+                            <div class="modal-body">
+                                <input type="hidden" id="inputid1"/>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label" for="e-inputuser">User</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="e-inputuser" th:field="*{user}"
+                                                name="user">
+                                            <option value="" disabled>Select User</option>
+                                            <option th:each="user : ${users}" th:value="${user.id}"
+                                                    th:text="${user.userName}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label" for="e-amount">Amount</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" th:field="*{amount}" class="form-control"
+                                               id="e-amount"
+                                               name="amount"
+                                               placeholder="Enter Amount">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label" for="e-transactiontype">Transaction
+                                        Type</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="e-transactiontype"
+                                                th:field="*{transactionType}"
+                                                name="transactiontype" style="width: 100%;">
+                                            <option value="" disabled>Select Transaction Type</option>
+                                            <option th:each="transactionType : ${T(com.moulik.businessassistant.model.TransactionType).values()}"
+                                                    th:value="${transactionType.name()}"
+                                                    th:text="${transactionType.name()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label" for="e-date">Date</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group date" id="e-date"
+                                             data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input"
+                                                   id="edate"
+                                                   name="datetime"
+                                                   th:field="*{datetime}"
+                                                   data-target="#e-date"/>
+                                            <div class="input-group-append" data-target="#e-date"
+                                                 data-toggle="datetimepicker">
+                                                <div class="input-group-text">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="confirmEdit" type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
             <!--            <div class="modal fade" id="modal-view">-->
             <!--                <div class="modal-dialog">-->
@@ -483,8 +463,15 @@
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#bankStatementTable_wrapper .col-md-6:eq(0)');
 
+            //Initialize Select2 Elements
+            $('.select2').select2()
+
             //Date picker
             $('#a-date').datetimepicker({
+                format: 'L'
+            });
+
+            $('#e-date').datetimepicker({
                 format: 'L'
             });
 
@@ -498,6 +485,9 @@
                     },
                     transactiontype: {
                         required: true
+                    },
+                    datetime: {
+                        required: true
                     }
                 },
                 messages: {
@@ -509,6 +499,9 @@
                     },
                     transactiontype: {
                         required: "Please select type",
+                    },
+                    datetime: {
+                        required: "Please select date",
                     }
                 },
                 errorElement: 'span',
@@ -533,6 +526,98 @@
                             setTimeout(function () {
                                 location.reload();  //Refresh page
                             }, 3000);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            });
+
+            $(document).on("click", "#btnEdit", function () {
+                var bankStatementId = $(this).data('bankstatement-id');
+
+                $.ajax({
+                    type: 'GET',
+                    url: "/bankstatements/" + bankStatementId,
+                    dataType: "json",
+                    success: function (data) {
+                        console.log(data.datetime);
+                        $('#inputid1').val(bankStatementId);
+                        $('#e-inputuser').val(data.user.id);
+                        $('#e-amount').val(data.amount);
+                        $('#e-transactiontype').val(data.transactionType);
+                        $('#edate').val(data.datetime);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            });
+
+            $('#editForm').validate({
+                rules: {
+                    user: {
+                        required: true
+                    },
+                    amount: {
+                        required: true
+                    },
+                    transactiontype: {
+                        required: true
+                    },
+                    datetime: {
+                        required: true
+                    }
+                },
+                messages: {
+                    user: {
+                        required: "Please enter a name"
+                    },
+                    amount: {
+                        required: "Please enter unit",
+                    },
+                    transactiontype: {
+                        required: "Please select type",
+                    },
+                    datetime: {
+                        required: "Please select date",
+                    }
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                },
+                submitHandler: function (form) {
+                    var bankStatementId = document.getElementById("inputid1").value;
+
+                    var formData = {
+                        user: $("#e-inputuser").val(),
+                        amount: $("#e-amount").val(),
+                        transactiontype: $("#e-transactiontype").val(),
+                        datetime: $("#edate").val()
+                    };
+
+                    console.log(formData);
+
+                    $.ajax({
+                        type: "PUT",
+                        url: "/bankstatements/edit/" + bankStatementId,
+                        data: JSON.stringify(formData),
+                        contentType: 'application/json',
+                        success: function (data) {
+                            $('#modal-edit').modal('hide');
+                            toastr.success(data);
+                            setTimeout(function () {
+                                location.reload();  //Refresh page
+                            }, 3000); //3 Second
                         },
                         error: function (err) {
                             console.log(err);
